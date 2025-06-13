@@ -1,0 +1,17 @@
+import { Outlet } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/Footer";
+
+export default function MainLayout() {
+  return (
+    <div className="bg-gray-900">
+      <div className="  text-white">
+        <Header />
+        <main className=" min-h-screen pt-24 pb-8 px-3 md:px-10 max-w-6xl mx-auto">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  );
+}
