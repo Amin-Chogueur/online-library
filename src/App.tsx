@@ -11,7 +11,7 @@ import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import BookDetail from "./pages/BookDetails";
 
-const routes = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -19,14 +19,23 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/books" replace /> },
       { path: "books", element: <Books /> },
-      { path: "books/:title", element: <BookDetail /> },
+      {
+        path: "books/:title",
+        element: <BookDetail />,
+        // Add this if you need to access the params later
+        loader: ({ params }) => {
+          return { title: params.title };
+        },
+      },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "cart", element: <Cart /> },
+      // Add a catch-all route for 404s that might slip through
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={routes} />;
+  return <RouterProvider router={router} />;
 }

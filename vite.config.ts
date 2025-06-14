@@ -7,4 +7,8 @@ export default defineConfig({
   preview: {
     port: 5173,
   },
+  base: "/", // This is crucial for Vercel deployments
+  build: {
+    outDir: "dist", // Make sure this matches Vercel's output directory
+  },
 });
