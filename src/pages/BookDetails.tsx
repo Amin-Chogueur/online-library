@@ -4,18 +4,27 @@ import Spinner from "../components/ui/Spinner";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useEffect } from "react";
 import { fetchBook } from "../store/slices/bookSlices";
+import { formatCurency } from "../helpers/formatCurency";
+import { addToCart } from "../store/slices/cartSlice";
 
 export default function BookDetail() {
   const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.cart);
   const { title } = useParams();
   const { book, bookLoading } = useAppSelector((state) => state.books);
+  const isInCart = cart.find((item) => item._id === book?._id);
+  function handleAdToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault(); // prevents the <Link> default action
+    e.stopPropagation();
+    dispatch(addToCart(book?._id));
+  }
 
   useEffect(() => {
     dispatch(fetchBook(title as string));
   }, [dispatch, title]);
   return (
     <div className=" max-w-5xl mx-auto  text-gray-100 mb-[20px]">
-      <h1 className="text-3xl font-bold text-amber-600 text-center mb-12">
+      <h1 className="text-3xl font-bold text-amber-500 text-center mb-12">
         Détails du livre
       </h1>
 
@@ -37,7 +46,7 @@ export default function BookDetail() {
 
             {/* Informations du livre */}
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-amber-400 mb-2">
+              <h1 className="text-3xl font-bold text-amber-500 mb-2">
                 {book.title}
               </h1>
               <p className="text-md text-gray-300 mb-4 italic">
@@ -50,38 +59,24 @@ export default function BookDetail() {
 
               <div className="grid grid-cols-2 gap-4 text-sm text-gray-300">
                 <div>
-                  <span className="font-semibold text-gray-400">Pages :</span>{" "}
+                  <span className="font-semibold text-gray-400">Pages: </span>{" "}
                   {book.numberOfPages}
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-400">Prix :</span> €{" "}
-                  {(parseInt(book.price) / 100).toFixed(2)}
-                </div>
-                <div>
-                  <span
-                    className={`ml-1 px-2 py-1 text-xs rounded-full font-medium ${
-                      book.quantity > 3
-                        ? "bg-green-200 text-green-900"
-                        : book.quantity > 0
-                          ? "bg-red-400 text-red-700"
-                          : "bg-red-600 text-white"
-                    }`}
-                  >
-                    {book.quantity > 0
-                      ? `${book.quantity} disponible(s)`
-                      : "Rupture de stock"}
-                  </span>
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-400">
-                    Ajouté le :
-                  </span>{" "}
-                  {new Date(book.createdAt!).toLocaleDateString()}
+                  <span className="font-semibold text-gray-400">Prix: </span>
+                  {formatCurency(book.price)}
                 </div>
               </div>
+              <button
+                disabled={isInCart ? true : false}
+                onClick={handleAdToCart}
+                className="bg-amber-600 hover:bg-amber-700 px-2 py-1 rounded-lg mt-5 cursor-pointer disabled:bg-gray-500"
+              >
+                {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
+              </button>
               <Link
                 to={"/books"}
-                className="flex gap-2 items-center absolute top-[-30px] left-0 text-orange-600 underline"
+                className="flex gap-2 items-center absolute top-[-30px] left-0 text-amber-500 underline"
               >
                 <FiArrowLeft size={24} />
                 <span>Retour à la liste</span>

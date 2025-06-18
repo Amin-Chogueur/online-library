@@ -7,7 +7,7 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: "-100px" }); // Triggers when element is
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 ">
-      <h1 className="text-amber-600 text-3xl  text-center mb-12 font-bold">
+      <h1 className="text-amber-500 text-3xl  text-center mb-12 font-bold">
         À Propos de Nous
       </h1>
 
@@ -41,7 +41,7 @@ export default function About() {
           >
             {" "}
             <div>
-              <h3 className="text-amber-700 text-2xl md:text-3xl font-semibold mb-4">
+              <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Bienvenue sur Ghiz Read Librairie!
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
@@ -54,13 +54,13 @@ export default function About() {
               </p>
             </div>
             <div>
-              <h3 className="text-amber-700 text-2xl md:text-3xl font-semibold mb-4">
+              <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Pourquoi Nous Choisir ?
               </h3>
               <ul className="space-y-6">
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    <span className="font-bold text-amber-700">
+                    <span className="font-bold text-amber-500">
                       Large Sélection :
                     </span>{" "}
                     Découvrez notre vaste choix de livres pour tous les goûts et
@@ -71,7 +71,7 @@ export default function About() {
                 </li>
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    <span className="font-bold text-amber-700">
+                    <span className="font-bold text-amber-500">
                       Expérience Personnalisée :
                     </span>{" "}
                     Notre équipe passionnée est dédiée à vous aider à trouver
@@ -82,7 +82,7 @@ export default function About() {
                 </li>
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    <span className="font-bold text-amber-700">
+                    <span className="font-bold text-amber-500">
                       Focalisation sur la Communauté :
                     </span>{" "}
                     Nous sommes bien plus qu'une simple librairie ; nous sommes
@@ -95,7 +95,7 @@ export default function About() {
               </ul>
             </div>
             <div>
-              <h3 className="text-amber-700 text-2xl md:text-3xl font-semibold mb-4">
+              <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Rejoignez Notre Communauté !
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
@@ -117,7 +117,7 @@ export default function About() {
       <div className="text-center mt-12">
         <Link
           to={"/contact"}
-          className="inline-block bg-amber-700 hover:bg-amber-600 text-white font-medium py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg"
+          className="inline-block bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg"
         >
           Restez en Contact &rarr;
         </Link>

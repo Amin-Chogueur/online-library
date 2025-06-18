@@ -22,7 +22,7 @@ export default function SearchBook() {
       />
       <button
         onClick={handleSearch}
-        className="absolute top-1/2 right-0 -translate-y-1/2 text-zinc-400 cursor-pointer bg-orange-700 h-full w-[25px] flex justify-center items-center rounded-br-lg rounded-tr-lg"
+        className="absolute top-1/2 right-0 -translate-y-1/2 text-zinc-400 cursor-pointer bg-amber-600 h-full w-[25px] flex justify-center items-center rounded-br-lg rounded-tr-lg"
       >
         <FiSearch />
       </button>

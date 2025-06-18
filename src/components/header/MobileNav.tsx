@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { RiShoppingBag4Fill } from "react-icons/ri";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const pathname = location.pathname;
-  console.log(pathname);
+
   return (
     <div className="md:hidden">
       {" "}
@@ -19,7 +16,7 @@ export default function MobileNav() {
                 to="/books"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
-                    isActive ? "bg-amber-700" : "bg-gray-900"
+                    isActive ? "bg-amber-600" : "bg-gray-900"
                   }`
                 }
                 onClick={() => setIsOpen(false)}
@@ -32,7 +29,7 @@ export default function MobileNav() {
                 to="/about"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
-                    isActive ? "bg-amber-700" : "bg-gray-900"
+                    isActive ? "bg-amber-600" : "bg-gray-900"
                   }`
                 }
                 onClick={() => setIsOpen(false)}
@@ -45,7 +42,7 @@ export default function MobileNav() {
                 to="/contact"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
-                    isActive ? "bg-amber-700" : "bg-gray-900"
+                    isActive ? "bg-amber-600" : "bg-gray-900"
                   }`
                 }
                 onClick={() => setIsOpen(false)}
@@ -59,7 +56,7 @@ export default function MobileNav() {
       <div className="flex items-center gap-3">
         {isOpen ? (
           <span
-            className={`text-orange-700 text-2xl cursor-pointer`}
+            className={`text-amber-600 text-2xl cursor-pointer`}
             onClick={() => setIsOpen(false)}
           >
             ✖
@@ -70,12 +67,6 @@ export default function MobileNav() {
             onClick={() => setIsOpen(true)}
           />
         )}
-        <Link
-          to="/cart"
-          className="bg-gray-900 p-1 rounded-full cursor-pointer"
-        >
-          <RiShoppingBag4Fill className="text-orange-700 text-2xl " />
-        </Link>
       </div>
     </div>
   );

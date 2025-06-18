@@ -1,7 +1,19 @@
 import { Link } from "react-router-dom";
 import type { BookType } from "../../type/book";
+import { formatCurency } from "../../helpers/formatCurency";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { addToCart } from "../../store/slices/cartSlice";
 
 export default function Book({ book }: { book: BookType }) {
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.cart);
+  const isInCart = cart.find((item) => item._id === book._id);
+  function handleAdToCart(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault(); // prevents the <Link> default action
+    e.stopPropagation();
+    dispatch(addToCart(book._id));
+  }
+
   return (
     <Link
       to={`/books/${book.title.replace(/ /g, "_")}`}
@@ -32,25 +44,17 @@ export default function Book({ book }: { book: BookType }) {
         <p className="text-xs text-gray-400 mb-3">{book.numberOfPages} pages</p>
 
         <div className="mt-auto">
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-lg font-bold text-teal-400">
-              ${(parseInt(book.price) / 100).toFixed(2)}
-            </span>
-            <span
-              className={`px-2 py-1 text-xs rounded-full font-medium ${
-                book.quantity > 3
-                  ? "bg-green-200 text-green-900"
-                  : book.quantity > 0
-                    ? "bg-red-400 text-red-700"
-                    : "bg-red-600 text-white"
-              }`}
-            >
-              {book.quantity > 0
-                ? `${book.quantity} en stock`
-                : "Rupture de stock"}
-            </span>
-          </div>
+          <span className="text-lg font-bold text-teal-400">
+            {formatCurency(book.price)}
+          </span>
         </div>
+        <button
+          disabled={isInCart ? true : false}
+          onClick={handleAdToCart}
+          className="bg-amber-700 hover:bg-amber-600 px-2 py-1 rounded-lg mt-5 cursor-pointer disabled:bg-gray-500"
+        >
+          {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
+        </button>
       </div>
     </Link>
   );

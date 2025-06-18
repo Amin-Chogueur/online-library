@@ -8,7 +8,7 @@ function Contact() {
   return (
     <div className=" flex justify-center items-center ">
       <div ref={ref}>
-        <h2 className="text-orange-600 text-3xl text-center mb-12 ">
+        <h2 className="text-amber-500 text-3xl text-center mb-12 ">
           Contactez-nous
         </h2>
         <div className="flex flex-col md:flex-row gap-20 justify-between items-start   w-full  mx-auto mt-6 ">
@@ -85,7 +85,7 @@ function Contact() {
                 />
               </div>
               <button
-                className="bg-orange-600 text-white py-2 rounded-md hover:bg-orange-700 focus:outline-none w-full md:w-auto"
+                className="bg-amber-600 text-white py-2 rounded-md hover:bg-amber-500 focus:outline-none w-full md:w-auto cursor-pointer"
                 type="submit"
               >
                 Envoyer

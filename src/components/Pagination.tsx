@@ -44,8 +44,8 @@ export default function Pagination() {
             className={`cursor-pointer w-10 h-10 rounded-md text-sm font-medium transition
               ${
                 page === ele
-                  ? "bg-blue-600 text-white dark:bg-blue-500"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  ? " text-white bg-amber-600"
+                  : "bg-gray-700  text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
           >
             {ele}
@@ -57,7 +57,7 @@ export default function Pagination() {
       <button
         disabled={page === totalPages}
         onClick={() => navigateToPage(nextPage)}
-        className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-md border border-gray-700 dark:border-gray-500 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-md  border-gray-500  bg-gray-800  text-gray-200  hover:bg-gray-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <FiChevronRight className="text-lg" />
       </button>

@@ -13,8 +13,8 @@ function Footer() {
           </Link>
         </h2>
         <p className="text-lg text-center">
-          Copyright © 2024{" "}
-          <Link to={"/"} className="text-orange-700 text-2xl">
+          Copyright © 2025{" "}
+          <Link to={"/"} className="text-amber-600 text-2xl">
             Ghiz Read
           </Link>
           . All rights reserved.

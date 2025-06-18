@@ -22,15 +22,10 @@ const router = createBrowserRouter([
       {
         path: "books/:title",
         element: <BookDetail />,
-        // Add this if you need to access the params later
-        loader: ({ params }) => {
-          return { title: params.title };
-        },
       },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "cart", element: <Cart /> },
-      // Add a catch-all route for 404s that might slip through
       { path: "*", element: <ErrorPage /> },
     ],
   },

@@ -6,9 +6,10 @@ export type BookType = {
   title: string;
   author: string;
   numberOfPages: string;
-  price: string;
+  price: number;
   quantity: number;
   category: CategoryType;
   createdAt?: string;
   description: string;
+  quantityInCart?: number;
 };
