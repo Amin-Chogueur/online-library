@@ -15,10 +15,9 @@ export default function Book({ book }: { book: BookType }) {
   }
 
   return (
-    <Link
-      to={`/books/${book.title.replace(/ /g, "_")}`}
+    <div
       key={book._id}
-      className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col "
+      className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-[550px]"
     >
       <div className="h-64 overflow-hidden">
         <img
@@ -48,14 +47,58 @@ export default function Book({ book }: { book: BookType }) {
             {formatCurency(book.price)}
           </span>
         </div>
-        <button
-          disabled={isInCart ? true : false}
-          onClick={handleAdToCart}
-          className="bg-amber-700 hover:bg-amber-600 px-2 py-1 rounded-lg mt-5 cursor-pointer disabled:bg-gray-500"
-        >
-          {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
-        </button>
+        <div className="flex flex-col gap-3 mt-5">
+          <Link
+            to={`/books/${book.title.replace(/ /g, "_")}`}
+            className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
+             bg-amber-700 hover:bg-amber-600 text-white shadow hover:shadow-md
+             focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+          >
+            <svg
+              className="w-4 h-4 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Plus de détails
+          </Link>
+
+          {book.quantity > 0 && (
+            <button
+              disabled={isInCart ? true : false}
+              onClick={handleAdToCart}
+              className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
+               bg-emerald-700 hover:bg-emerald-600 text-white shadow hover:shadow-md
+               disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed
+               focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 cursor-pointer"
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={isInCart ? "M5 13l4 4L19 7" : "M12 6v6m0 0v6m0-6h6m-6 0H6"}
+                />
+              </svg>
+              {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
+            </button>
+          )}
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

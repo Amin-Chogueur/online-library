@@ -27,7 +27,15 @@ export default function BookDetail() {
       <h1 className="text-3xl font-bold text-amber-500 text-center mb-12">
         Détails du livre
       </h1>
-
+      {book && book.quantity === 0 && (
+        <h2 className="text-center text-lg text-orange-500  md:w-[60%] mx-auto mb-10">
+          Ce livre est actuellement indisponible. Contactez-nous via le{" "}
+          <Link to={"/contact"} className="underline">
+            formulaire de contact
+          </Link>{" "}
+          ou par téléphone pour le commander.
+        </h2>
+      )}
       {bookLoading === "pending" ? (
         <Spinner />
       ) : (
@@ -67,13 +75,36 @@ export default function BookDetail() {
                   {formatCurency(book.price)}
                 </div>
               </div>
-              <button
-                disabled={isInCart ? true : false}
-                onClick={handleAdToCart}
-                className="bg-amber-600 hover:bg-amber-700 px-2 py-1 rounded-lg mt-5 cursor-pointer disabled:bg-gray-500"
-              >
-                {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
-              </button>
+              {book.quantity > 0 && (
+                <button
+                  disabled={isInCart ? true : false}
+                  onClick={handleAdToCart}
+                  className="mt-3 px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
+               bg-emerald-700 hover:bg-emerald-600 text-white shadow hover:shadow-md
+               disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed
+               focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 cursor-pointer"
+                >
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={
+                        isInCart
+                          ? "M5 13l4 4L19 7"
+                          : "M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      }
+                    />
+                  </svg>
+                  {isInCart ? "Déjà dans le panier" : "Ajouter au panier"}
+                </button>
+              )}
               <Link
                 to={"/books"}
                 className="flex gap-2 items-center absolute top-[-30px] left-0 text-amber-500 underline"

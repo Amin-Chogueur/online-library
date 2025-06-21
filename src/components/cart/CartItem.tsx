@@ -5,6 +5,7 @@ import { FaBookOpen } from "react-icons/fa";
 import { formatCurency } from "../../helpers/formatCurency";
 import {
   decresseQuantity,
+  fetchBooksInCart,
   incresseQuantity,
   removeFromCart,
 } from "../../store/slices/cartSlice";
@@ -25,6 +26,11 @@ export default function CartItem({ item }: { item: BookType }) {
   }
   function handleDecressQuantity() {
     dispatch(decresseQuantity(item._id));
+  }
+  function handleRemoveItemFromCart() {
+    dispatch(removeFromCart(item._id));
+    //i refetch books cus the ids in the cart was changed so i can kepp the  books in cart page updated
+    dispatch(fetchBooksInCart());
   }
 
   return (
@@ -79,7 +85,7 @@ export default function CartItem({ item }: { item: BookType }) {
           {formatCurency(item.price! * item.quantityInCart!)}
         </p>
         <button
-          onClick={() => dispatch(removeFromCart(item._id))}
+          onClick={handleRemoveItemFromCart}
           className="mt-2 flex items-center gap-1 text-red-400 hover:text-red-300 text-sm font-medium transition-colors duration-200 cursor-pointer"
           aria-label="Remove item"
         >

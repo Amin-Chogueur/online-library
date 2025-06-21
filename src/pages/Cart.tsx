@@ -1,39 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { fetchAllBooks } from "../store/slices/bookSlices";
+
 import CartItem from "../components/cart/CartItem";
 import { FiShoppingCart } from "react-icons/fi";
 
 import OrderSummary from "../components/cart/OrderSummary";
 import OrderForm from "../components/cart/OrderForm";
 import EmptyCart from "../components/cart/EmptyCart";
+import { fetchBooksInCart } from "../store/slices/cartSlice";
+import Spinner from "../components/ui/Spinner";
 
 export default function Cart() {
-  const books = useAppSelector((state) => state.books.books);
-  const cart = useAppSelector((state) => state.cart.cart);
+  const dispatch = useAppDispatch();
+  const [successOrderMessage, setSuccessOrderMessage] = useState("");
+  // const [errorOrderMessage, setErrorOrderMessage] = useState("");
+  const { cart, booksInCart, booksInCartLoading } = useAppSelector(
+    (state) => state.cart
+  );
 
-  const booksInCart = cart.map((item) => {
-    const book = books.find((book) => book._id === item._id);
-    if (book) {
-      const bookInCart = {
-        ...book,
-        quantityInCart: item.quantityInCart,
-      };
-      return bookInCart;
-    }
+  const cartItems = booksInCart.map((book) => {
+    const cartItem = cart.find((item) => item._id === book._id);
+    return {
+      ...book,
+      quantityInCart: cartItem?.quantityInCart || 0,
+    };
   });
-  const totalPrice = booksInCart.reduce(
+
+  const totalPrice = cartItems.reduce(
     (acu, cur) => acu + (cur?.quantityInCart ?? 0) * (cur?.price ?? 0),
     0
   );
-  const oredrMessage = false;
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllBooks());
+    dispatch(fetchBooksInCart());
   }, [dispatch]);
-
   return (
     <div className="min-h-[100vh] pt-[10px] pb-24  ">
       <h1 className="text-amber-500 text-3xl font-bold text-center mb-8">
@@ -46,9 +46,13 @@ export default function Cart() {
           {/* Cart Items Section */}
           <div className="lg:w-[70%]">
             <div className="flex flex-col gap-4 mb-6">
-              {booksInCart.map((item) => (
-                <CartItem key={item?._id} item={item!} />
-              ))}
+              {booksInCartLoading === "pending" ? (
+                <Spinner />
+              ) : (
+                cartItems.map((item) => (
+                  <CartItem key={item._id} item={item!} />
+                ))
+              )}
             </div>
 
             <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
@@ -67,20 +71,16 @@ export default function Cart() {
             {/* Order Summary */}
             <OrderSummary totalPrice={totalPrice} />
             {/* Contact Form */}
-            <OrderForm />
+            <OrderForm setSuccessOrderMessage={setSuccessOrderMessage} />
           </div>
         </div>
       ) : (
         <div className="text-center py-16">
           <EmptyCart />
 
-          {oredrMessage && (
+          {successOrderMessage && (
             <div className="mt-12 bg-gray-800 p-6 rounded-xl max-w-2xl mx-auto">
-              <p className="text-amber-500 text-xl">
-                Merci de nous avoir choisis ! Nous avons bien reçu votre
-                commande et nous vous contacterons sous peu pour plus de détails
-                concernant l'expédition et les options de paiement.
-              </p>
+              <p className="text-amber-500 text-xl">{successOrderMessage}</p>
             </div>
           )}
         </div>

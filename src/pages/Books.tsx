@@ -31,7 +31,7 @@ export default function Books() {
       <div className=" h-[80vh]"></div>
       <div className="min-h-screen px-2 py-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl mb-8 font-bold text-amber-500 text-center">
+          <h1 className="text-3xl  mt-[60px] mb-8 font-bold text-amber-500 text-center">
             Notre collection
           </h1>
           {error ? (
