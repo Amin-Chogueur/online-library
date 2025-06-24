@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Navigate to="//Nos_Livres" replace /> },
+      { index: true, element: <Navigate to="/Nos_Livres" replace /> },
       { path: "/Nos_Livres", element: <Books /> },
       {
         path: "/Nos_Livres/:title",
