@@ -3,11 +3,19 @@ import type { BookType } from "../../type/book";
 import { formatCurency } from "../../helpers/formatCurency";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { addToCart } from "../../store/slices/cartSlice";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import {
+  addTofavoritePage,
+  removeFromfavoritePage,
+} from "../../store/slices/favoriteSlice";
 
 export default function Book({ book }: { book: BookType }) {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
+  const favorites = useAppSelector((state) => state.favorites.favorites);
+  const isInFavorites = favorites.find((item) => item._id === book._id);
   const isInCart = cart.find((item) => item._id === book._id);
+
   function handleAdToCart(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault(); // prevents the <Link> default action
     e.stopPropagation();
@@ -30,9 +38,27 @@ export default function Book({ book }: { book: BookType }) {
       </div>
 
       <div className="p-4 flex-1 flex flex-col">
-        <h2 className="text-lg font-semibold text-amber-400 mb-2 line-clamp-2">
-          {book.title}
-        </h2>
+        <div className="flex justify-between items-start">
+          <h2 className="text-lg font-semibold text-amber-400 mb-2 line-clamp-2">
+            {book.title}
+          </h2>
+          {isInFavorites ? (
+            <button
+              onClick={() => dispatch(removeFromfavoritePage(book._id))}
+              className="text-2xl focus:outline-none cursor-pointer"
+            >
+              <FaHeart className="text-red-500" />
+            </button>
+          ) : (
+            <button
+              onClick={() => dispatch(addTofavoritePage(book))}
+              className="text-2xl focus:outline-none cursor-pointer"
+            >
+              <FaRegHeart className="text-white hover:text-red-500" />
+            </button>
+          )}
+        </div>
+
         <p className="text-sm text-gray-300 mb-1">par {book.author}</p>
 
         {/* 🆕 Category display */}
@@ -49,7 +75,7 @@ export default function Book({ book }: { book: BookType }) {
         </div>
         <div className="flex flex-col gap-3 mt-5">
           <Link
-            to={`/books/${book.title.replace(/ /g, "_")}`}
+            to={`/Nos_Livres/${book.title.replace(/ /g, "_")}`}
             className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
              bg-amber-700 hover:bg-amber-600 text-white shadow hover:shadow-md
              focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"

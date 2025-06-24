@@ -17,7 +17,7 @@ function Header() {
 
         <MobileNav />
         <Link
-          to="/cart"
+          to="/Panier"
           className="bg-gray-900 p-1 rounded-full cursor-pointer relative"
         >
           {cart.length > 0 && (

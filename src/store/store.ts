@@ -1,7 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import booksReducer from "./slices/bookSlices";
 import categoriesReducer from "./slices/categorySlice";
 import cartReducer from "./slices/cartSlice";
+import favoritesReducer from "./slices/favoriteSlice";
 import {
   persistStore,
   persistReducer,
@@ -15,24 +16,26 @@ import {
 
 import storage from "redux-persist/lib/storage"; // localStorage for web
 
-const cartPersistConfig = {
-  key: "cart",
+const rootReducer = combineReducers({
+  books: booksReducer, // not persisted
+  categories: categoriesReducer, // not persisted
+  cart: cartReducer, // will be persisted via root config
+  favorites: favoritesReducer, // will be persisted via root config
+});
+
+const persistConfig = {
+  key: "root",
   storage,
-  whitelist: ["cart"], // persist the cart array inside cart slice
+  whitelist: ["cart", "favorites"], // persist only these
 };
 
-const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    books: booksReducer,
-    categories: categoriesReducer,
-    cart: persistedCartReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Ignore redux-persist actions for serializable middleware
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
@@ -40,7 +43,6 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+// Types
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

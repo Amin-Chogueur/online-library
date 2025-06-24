@@ -6,12 +6,19 @@ import { useEffect } from "react";
 import { fetchBook } from "../store/slices/bookSlices";
 import { formatCurency } from "../helpers/formatCurency";
 import { addToCart } from "../store/slices/cartSlice";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import {
+  addTofavoritePage,
+  removeFromfavoritePage,
+} from "../store/slices/favoriteSlice";
 
 export default function BookDetail() {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
   const { title } = useParams();
   const { book, bookLoading } = useAppSelector((state) => state.books);
+  const favorites = useAppSelector((state) => state.favorites.favorites);
+  const isInFavorites = favorites.find((item) => item._id === book?._id);
   const isInCart = cart.find((item) => item._id === book?._id);
   function handleAdToCart(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault(); // prevents the <Link> default action
@@ -54,9 +61,27 @@ export default function BookDetail() {
 
             {/* Informations du livre */}
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-amber-500 mb-2">
-                {book.title}
-              </h1>
+              <div className="flex justify-between">
+                <h1 className="text-3xl font-bold text-amber-500 mb-2">
+                  {book.title}
+                </h1>
+                {isInFavorites ? (
+                  <button
+                    onClick={() => dispatch(removeFromfavoritePage(book._id))}
+                    className="text-2xl focus:outline-none cursor-pointer"
+                  >
+                    <FaHeart className="text-red-500" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => dispatch(addTofavoritePage(book))}
+                    className="text-2xl focus:outline-none cursor-pointer"
+                  >
+                    <FaRegHeart className="text-white hover:text-red-500" />
+                  </button>
+                )}
+              </div>
+
               <p className="text-md text-gray-300 mb-4 italic">
                 par {book.author}
               </p>

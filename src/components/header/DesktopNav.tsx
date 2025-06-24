@@ -1,12 +1,15 @@
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 export default function DesktopNav() {
+  const favorites = useAppSelector((state) => state.favorites.favorites);
+  const totalFavoritesBook = favorites.length;
   return (
     <nav className="hidden md:block">
       <ul className="flex gap-3 items-center text-[18px]">
         <li>
           <NavLink
-            to="/books"
+            to="/Nos_Livres"
             className={({ isActive }) =>
               ` px-2 py-1 rounded-lg text-center ${
                 isActive ? "bg-amber-600" : "bg-gray-900"
@@ -18,7 +21,24 @@ export default function DesktopNav() {
         </li>
         <li>
           <NavLink
-            to="/about"
+            to="/Mes_favoris"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center relative ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            {favorites.length > 0 && (
+              <span className="absolute bg-red-600 w-4 h-4 flex justify-center items-center top-[-8px] right-[-3px] rounded-full">
+                {totalFavoritesBook}
+              </span>
+            )}
+            Mes favoris
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/À_propos"
             className={({ isActive }) =>
               ` px-2 py-1 rounded-lg text-center ${
                 isActive ? "bg-amber-600" : "bg-gray-900"
@@ -30,7 +50,7 @@ export default function DesktopNav() {
         </li>
         <li>
           <NavLink
-            to="/contact"
+            to="/Contact"
             className={({ isActive }) =>
               ` px-2 py-1 rounded-lg text-center ${
                 isActive ? "bg-amber-600" : "bg-gray-900"

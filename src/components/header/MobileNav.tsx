@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const favorites = useAppSelector((state) => state.favorites.favorites);
+  const totalFavoritesBook = favorites.length;
   return (
     <div className="md:hidden">
       {" "}
@@ -13,7 +15,7 @@ export default function MobileNav() {
           <ul className="flex flex-col justify-center text-[18px] items-center gap-[20px] ">
             <li className="w-full">
               <NavLink
-                to="/books"
+                to="/Nos_Livres"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
                     isActive ? "bg-amber-600" : "bg-gray-900"
@@ -26,7 +28,25 @@ export default function MobileNav() {
             </li>
             <li className="w-full">
               <NavLink
-                to="/about"
+                to="/Mes_favoris"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center relative ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                {favorites.length > 0 && (
+                  <span className="absolute bg-red-600 w-4 h-4 flex justify-center items-center top-[-8px] right-[-3px] rounded-full">
+                    {totalFavoritesBook}
+                  </span>
+                )}
+                Mes favoris
+              </NavLink>
+            </li>
+            <li className="w-full">
+              <NavLink
+                to="/À_propos"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
                     isActive ? "bg-amber-600" : "bg-gray-900"
@@ -37,9 +57,10 @@ export default function MobileNav() {
                 À propos
               </NavLink>
             </li>
+
             <li className="w-full">
               <NavLink
-                to="/contact"
+                to="/Contact"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
                     isActive ? "bg-amber-600" : "bg-gray-900"
