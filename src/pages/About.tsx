@@ -45,7 +45,7 @@ export default function About() {
                 Bienvenue sur Ghiz Read Librairie!
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Chez Ghiz Read Store, nous croyons que chaque livre ouvre une
+                Chez Ghizlene BookShop, nous croyons que chaque livre ouvre une
                 nouvelle porte vers l'aventure, le savoir et l'inspiration.
                 Notre collection soigneusement sélectionnée propose une large
                 gamme de genres, des classiques intemporels aux derniers

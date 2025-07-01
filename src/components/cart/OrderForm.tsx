@@ -68,7 +68,6 @@ function OrderForm({
           error.response?.data?.message || "Échec de l'envoi de la commonde"
         );
       }
-      console.log(error);
     } finally {
       setLoading(false);
     }

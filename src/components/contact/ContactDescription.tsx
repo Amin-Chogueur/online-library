@@ -11,7 +11,7 @@ export default function ContactDescription({
       transition={{ duration: 1 }}
       className="w-full"
     >
-      <div className="text-accent  text-xl ">
+      <div className="  text-xl ">
         <p>
           Merci de visiter notre collection de livres ! Nous sommes là pour vous
           aider à découvrir de nouvelles lectures, répondre à toutes vos
@@ -24,6 +24,11 @@ export default function ContactDescription({
           soyez curieux d`un titre spécifique, d`un genre, ou que vous
           souhaitiez en savoir plus sur notre Librairie, n`hésitez pas à nous
           contacter. Nous serions ravis d`avoir de vos nouvelles !
+        </p>
+        <hr className="my-5 w-[50%]" />
+        <p>
+          Vous pouvez également nous appeler directement via WhatsApp en
+          cliquant sur le bouton en bas à droite de votre écran !
         </p>
       </div>
     </motion.div>

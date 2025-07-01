@@ -1,9 +1,6 @@
-import { FaWhatsapp } from "react-icons/fa";
 import { FaRegMap } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 function Footer() {
-  const phoneNumber = "213671265377"; // Phone number without the "+" and spaces
-
   return (
     <footer className="  p-5  bg-gray-950 text-gray-300">
       <div className="flex flex-col items-center gap-5 w-[90%] mx-auto   md:flex-row md:justify-between">
@@ -26,13 +23,6 @@ function Footer() {
             className="cursor-pointer"
           >
             <FaRegMap className="text-3xl mr-3" />
-          </a>
-          <a
-            href={`https://wa.me/${phoneNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaWhatsapp className="text-3xl" />
           </a>
         </div>
       </div>

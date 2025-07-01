@@ -13,7 +13,6 @@ import Spinner from "../components/ui/Spinner";
 export default function Cart() {
   const dispatch = useAppDispatch();
   const [successOrderMessage, setSuccessOrderMessage] = useState("");
-  // const [errorOrderMessage, setErrorOrderMessage] = useState("");
   const { cart, booksInCart, booksInCartLoading } = useAppSelector(
     (state) => state.cart
   );
@@ -62,6 +61,11 @@ export default function Cart() {
                 nous vous contacterons par téléphone pour discuter des options
                 de paiement et de la manière dont vous souhaitez recevoir votre
                 commande.
+              </p>
+              <p className="border-l-amber-600 border-l-2 pl-4 mt-4">
+                En cas de souci lors de la commande, vous pouvez aussi nous
+                appeler directement via WhatsApp grâce au bouton en bas à
+                droite.
               </p>
             </div>
           </div>

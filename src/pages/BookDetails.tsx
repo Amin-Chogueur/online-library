@@ -131,7 +131,7 @@ export default function BookDetail() {
                 </button>
               )}
               <Link
-                to={"/books"}
+                to={"/Nos_Livres"}
                 className="flex gap-2 items-center absolute top-[-30px] left-0 text-amber-500 underline"
               >
                 <FiArrowLeft size={24} />

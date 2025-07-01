@@ -68,7 +68,7 @@ export default function Books() {
                   ))}
                 </div>
               )}
-              <Pagination />
+              {books.length > 0 && <Pagination />}
             </div>
           )}
         </div>

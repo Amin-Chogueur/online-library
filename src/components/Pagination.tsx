@@ -15,14 +15,14 @@ export default function Pagination() {
 
   const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  const navigateToPage = (newPage: number) => {
+  function navigateToPage(newPage: number) {
     const params = new URLSearchParams(searchParams);
     params.set("page", String(newPage));
     if (selectedCategory) {
       params.set("category", selectedCategory);
     }
     navigate(`${location.pathname}?${params.toString()}`);
-  };
+  }
 
   return (
     <div className="flex items-center justify-center gap-1 my-10">

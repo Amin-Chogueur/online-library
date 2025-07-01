@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function EmptyFavoritesPage() {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-2 md:p-6">
       <div className="max-w-2xl text-center bg-gray-800 rounded-xl p-8 shadow-2xl border border-gray-700">
         <div className="flex justify-center mb-6">
           <div className="relative">
