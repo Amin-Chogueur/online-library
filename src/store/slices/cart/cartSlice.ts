@@ -1,8 +1,35 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { ItemType } from "../../type/cart";
-import axios from "axios";
-import type { BookType } from "../../type/book";
-import type { RootState } from "../store";
+import { createSlice } from "@reduxjs/toolkit";
+import type { ItemType } from "../../../type/cart";
+
+import type { BookType } from "../../../type/book";
+
+import { fetchBooksInCart, placeOrder } from "./cartThunk";
+
+type OrderItem = {
+  _id: string;
+  bookId: string;
+  title: string;
+  category: string;
+  price: number;
+  quantityInCart: number;
+};
+
+type Customer = {
+  fullName: string;
+  email: string;
+  mobile: string;
+  address: string;
+};
+
+export type Order = {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  totalAmount: number;
+  status: string;
+  customer: Customer;
+  items: OrderItem[];
+};
 
 type InitialStateType = {
   booksInCart: BookType[];
@@ -11,6 +38,10 @@ type InitialStateType = {
   error: { id: string; message: string } | null;
   booksInCartLoading: "idle" | "pending" | "succeeded" | "failed";
   booksInCartError: null | string;
+  loadingPlacingOrder: "idle" | "pending" | "succeeded" | "failed";
+  errorPlacingOrderMessage: string;
+  successPlacingOrderMessage: string;
+  placedOrder: Order | undefined;
 };
 
 const initialState: InitialStateType = {
@@ -20,34 +51,12 @@ const initialState: InitialStateType = {
   error: null,
   booksInCartLoading: "idle",
   booksInCartError: "",
+  loadingPlacingOrder: "idle",
+  errorPlacingOrderMessage: "",
+  successPlacingOrderMessage: "",
+  placedOrder: undefined,
 };
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-export const fetchBooksInCart = createAsyncThunk(
-  "cart/fetchBooksInCart",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      // i get the ids here instead of geting them in the cart page  so i can fetch the books only once in the first render and whenever the user update the items quantity in the cart there is no need to refetch the books and if user remove item from cart , there i refetch the books again by dispatch this action in the remove button in the cartItem component for butter ux
-      const state = getState() as RootState; // Type cast to your RootState
-      const cart = state.cart.cart;
-      const ids = cart.map((item) => item._id);
-      const res = await axios.get(`${BASE_URL}/api/cart`, {
-        params: { ids },
-      });
-
-      return res.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          error.response?.data?.message || "An error occurred"
-        );
-      }
-
-      return rejectWithValue("An unknown error occurred");
-    }
-  }
-);
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -94,6 +103,12 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
     },
+    clearSuccesmessage: (state) => {
+      state.errorPlacingOrderMessage = "";
+      state.loadingPlacingOrder = "idle";
+      state.placedOrder = undefined;
+      state.successPlacingOrderMessage = "";
+    },
   },
   extraReducers: (builder) => {
     builder //'fetch all books without pagination'
@@ -107,6 +122,21 @@ const cartSlice = createSlice({
       .addCase(fetchBooksInCart.rejected, (state, action) => {
         state.booksInCartLoading = "failed";
         state.booksInCartError = action.payload as string;
+      })
+      //place Order
+      .addCase(placeOrder.pending, (state) => {
+        state.loadingPlacingOrder = "pending";
+      })
+      .addCase(placeOrder.fulfilled, (state, action) => {
+        state.loadingPlacingOrder = "succeeded";
+        state.placedOrder = action.payload.createdOrder;
+        state.successPlacingOrderMessage = action.payload.message;
+        state.cart = [];
+      })
+      .addCase(placeOrder.rejected, (state, action) => {
+        state.loadingPlacingOrder = "failed";
+        state.errorPlacingOrderMessage =
+          (action.payload as string) || "Échec de l'envoi de la commonde";
       });
   },
 });
@@ -117,5 +147,6 @@ export const {
   decresseQuantity,
   removeFromCart,
   clearCart,
+  clearSuccesmessage,
 } = cartSlice.actions;
 export default cartSlice.reducer;

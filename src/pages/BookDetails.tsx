@@ -3,14 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useEffect } from "react";
-import { fetchBook } from "../store/slices/bookSlices";
+
 import { formatCurency } from "../helpers/formatCurency";
-import { addToCart } from "../store/slices/cartSlice";
+import { addToCart } from "../store/slices/cart/cartSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   addTofavoritePage,
   removeFromfavoritePage,
 } from "../store/slices/favoriteSlice";
+import { fetchBook } from "../store/slices/book/bookThunk";
 
 export default function BookDetail() {
   const dispatch = useAppDispatch();

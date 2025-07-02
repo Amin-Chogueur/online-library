@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 
 import CartItem from "../components/cart/CartItem";
@@ -7,12 +7,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import OrderSummary from "../components/cart/OrderSummary";
 import OrderForm from "../components/cart/OrderForm";
 import EmptyCart from "../components/cart/EmptyCart";
-import { fetchBooksInCart } from "../store/slices/cartSlice";
+import { fetchBooksInCart } from "../store/slices/cart/cartThunk";
 import Spinner from "../components/ui/Spinner";
 
 export default function Cart() {
   const dispatch = useAppDispatch();
-  const [successOrderMessage, setSuccessOrderMessage] = useState("");
   const { cart, booksInCart, booksInCartLoading } = useAppSelector(
     (state) => state.cart
   );
@@ -75,18 +74,12 @@ export default function Cart() {
             {/* Order Summary */}
             <OrderSummary totalPrice={totalPrice} />
             {/* Contact Form */}
-            <OrderForm setSuccessOrderMessage={setSuccessOrderMessage} />
+            <OrderForm />
           </div>
         </div>
       ) : (
         <div className="text-center py-16">
           <EmptyCart />
-
-          {successOrderMessage && (
-            <div className="mt-12 bg-gray-800 p-6 rounded-xl max-w-2xl mx-auto">
-              <p className="text-amber-500 text-xl">{successOrderMessage}</p>
-            </div>
-          )}
         </div>
       )}
     </div>

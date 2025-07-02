@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { BookType } from "../../type/book";
 import { formatCurency } from "../../helpers/formatCurency";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { addToCart } from "../../store/slices/cartSlice";
+import { addToCart } from "../../store/slices/cart/cartSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   addTofavoritePage,
@@ -76,7 +76,7 @@ export default function Book({ book }: { book: BookType }) {
         <div className="flex flex-col gap-3 mt-5">
           <Link
             to={`/Nos_Livres/${book.title.replace(/ /g, "_")}`}
-            className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
+            className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide flex items-center justify-center
              bg-amber-700 hover:bg-amber-600 text-white shadow hover:shadow-md
              focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
           >
@@ -101,7 +101,7 @@ export default function Book({ book }: { book: BookType }) {
             <button
               disabled={isInCart ? true : false}
               onClick={handleAdToCart}
-              className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 flex items-center justify-center
+              className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide  flex items-center justify-center
                bg-emerald-700 hover:bg-emerald-600 text-white shadow hover:shadow-md
                disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed
                focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 cursor-pointer"

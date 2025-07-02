@@ -5,11 +5,11 @@ import { FaBookOpen } from "react-icons/fa";
 import { formatCurency } from "../../helpers/formatCurency";
 import {
   decresseQuantity,
-  fetchBooksInCart,
   incresseQuantity,
   removeFromCart,
-} from "../../store/slices/cartSlice";
+} from "../../store/slices/cart/cartSlice";
 import type { BookType } from "../../type/book";
+import { fetchBooksInCart } from "../../store/slices/cart/cartThunk";
 
 export default function CartItem({ item }: { item: BookType }) {
   const error = useAppSelector((state) => state.cart.error);

@@ -12,9 +12,9 @@ function Footer() {
         <p className="text-lg text-center">
           Copyright © 2025{" "}
           <Link to={"/"} className="text-amber-600 text-2xl">
-            Ghiz Read
+            Ghizlene BookShop
           </Link>
-          . All rights reserved.
+          . Tous droits réservés.
         </p>
         <div className="flex items-center">
           <a

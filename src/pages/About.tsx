@@ -42,7 +42,7 @@ export default function About() {
             {" "}
             <div>
               <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
-                Bienvenue sur Ghiz Read Librairie!
+                Bienvenue chez Ghizlene BookShop!
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
                 Chez Ghizlene BookShop, nous croyons que chaque livre ouvre une
@@ -107,7 +107,9 @@ export default function About() {
                 d'en faire partie.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mt-4">
-                Merci d'avoir choisi Ghiz Read. Bonne lecture !
+                Merci d'avoir choisi{" "}
+                <span className="font-bold">Ghizlene BookShop</span> . Bonne
+                lecture !
               </p>
             </div>
           </motion.div>

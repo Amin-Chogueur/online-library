@@ -1,5 +1,3 @@
-import axios, { isAxiosError } from "axios";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { orderFormSchema } from "../../helpers/formsSchema";
@@ -12,22 +10,23 @@ import {
   FiPhone,
   FiUser,
 } from "react-icons/fi";
-import React, { useState } from "react";
+import React from "react";
 import type { z } from "zod";
 import Input from "../ui/Input";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { clearCart } from "../../store/slices/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { placeOrder } from "../../store/slices/cart/cartThunk";
 export type OrderFormSchema = z.infer<typeof orderFormSchema>;
 
-function OrderForm({
-  setSuccessOrderMessage,
-}: {
-  setSuccessOrderMessage: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function OrderForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector((state) => state.cart.cart);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    cart: cartItems,
+    errorPlacingOrderMessage,
+    loadingPlacingOrder,
+  } = useAppSelector((state) => state.cart);
+
   const {
     register,
     handleSubmit,
@@ -45,36 +44,11 @@ function OrderForm({
     },
   });
 
-  async function onSendOrder(clientInfo: OrderFormSchema) {
-    try {
-      setErrorMessage("");
-      setLoading(true);
-      const res = await axios.post(
-        "https://ghiz-read-manager.vercel.app/api/orders",
-        {
-          clientInfo,
-          cartItems,
-        }
-      );
-
-      if (res.data.status === 200) {
-        console.log(res.data);
-        dispatch(clearCart());
-        setSuccessOrderMessage(res.data.message);
-      }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        setErrorMessage(
-          error.response?.data?.message || "Échec de l'envoi de la commonde"
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
-  function handleSendOrder(data: OrderFormSchema) {
-    onSendOrder(data);
-    reset();
+  function handleSendOrder(clientInfo: OrderFormSchema) {
+    dispatch(placeOrder({ clientInfo, cartItems })).then(() => {
+      navigate("/succès");
+      reset();
+    });
   }
   const orderInput = [
     {
@@ -116,16 +90,24 @@ function OrderForm({
       {orderInput.map((input) => (
         <Input key={input.lable} {...input} />
       ))}
-      {errorMessage && (
-        <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+      {errorPlacingOrderMessage && (
+        <p className="text-red-500 text-sm text-center">
+          {errorPlacingOrderMessage}
+        </p>
       )}
       <button
-        disabled={loading}
+        disabled={loadingPlacingOrder === "pending"}
         className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:bg-gray-600"
         type="submit"
       >
-        {loading ? <FiLoader className="animate-spin" /> : <FiCheckCircle />}{" "}
-        {loading ? "Envoi..." : " Envoyer la commande"}
+        {loadingPlacingOrder === "pending" ? (
+          <FiLoader className="animate-spin" />
+        ) : (
+          <FiCheckCircle />
+        )}{" "}
+        {loadingPlacingOrder === "pending"
+          ? "Envoi..."
+          : " Envoyer la commande"}
       </button>
     </form>
   );

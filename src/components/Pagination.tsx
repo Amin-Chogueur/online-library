@@ -30,7 +30,7 @@ export default function Pagination() {
       <button
         disabled={page === 1}
         onClick={() => navigateToPage(prevPage)}
-        className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-md border border-gray-700 dark:border-gray-500 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-md  border-gray-500  bg-gray-800  text-gray-200  hover:bg-gray-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <FiChevronLeft className="text-lg" />
       </button>

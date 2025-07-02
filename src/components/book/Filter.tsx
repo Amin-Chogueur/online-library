@@ -1,10 +1,9 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import Spinner from "../ui/Spinner";
-
 import { useEffect } from "react";
-import { fetchBooks } from "../../store/slices/bookSlices";
-import { fetchCategories } from "../../store/slices/categorySlice";
+import { fetchBooks } from "../../store/slices/book/bookThunk";
+import { fetchCategories } from "../../store/slices/category/categoryThunk";
 
 export default function Filter() {
   const dispatch = useAppDispatch();
@@ -19,12 +18,12 @@ export default function Filter() {
       return;
     }
     const categoory = selectedCategory.replace(/ /g, "_");
-    navigate(`/books?category=${categoory}&page=1`);
+    navigate(`/Nos_Livres?category=${categoory}&page=1`);
   };
 
   function handleBackToAllBooks() {
     dispatch(fetchBooks({ page: 1, selectedCategory: "All" }));
-    navigate(`/books?category=All&page=1`);
+    navigate(`/Nos_Livres?category=All&page=1`);
   }
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function Filter() {
         {categories.map((category) => (
           <Link
             key={category._id}
-            to={`/books?category=${category.name.replace(/ /g, "_")}&page=1`}
+            to={`/Nos_Livres?category=${category.name.replace(/ /g, "_")}&page=1`}
             className={`cursor-pointer px-4 py-2 rounded-full border font-serif text-sm transition-all
               hover:bg-amber-200 hover:text-amber-900
               ${
@@ -74,7 +73,7 @@ export default function Filter() {
       </div>
 
       {/* Mobile Dropdown */}
-      <div className="md:hidden mt-4 w-full flex gap-2">
+      <div className="md:hidden mt-4 w-full flex flex-col gap-2">
         <button
           onClick={handleBackToAllBooks}
           className={`cursor-pointer px-4 py-2 rounded-lg border font-serif text-sm transition-all

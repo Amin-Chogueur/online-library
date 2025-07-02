@@ -3,13 +3,13 @@ import Pagination from "../components/Pagination";
 import Slider from "../components/slider/Slider";
 import { motion, useInView } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { fetchBooks } from "../store/slices/bookSlices";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
 import SearchBook from "../components/book/SearchBook";
 import NoBooksFound from "../components/book/NoBooksFound";
 import Book from "../components/book/Book";
 import Filter from "../components/book/Filter";
+import { fetchBooks } from "../store/slices/book/bookThunk";
 
 export default function Books() {
   const ref = useRef(null);
@@ -47,8 +47,12 @@ export default function Books() {
           ) : (
             <div>
               {" "}
-              <Filter />
-              <SearchBook />
+              {bookLoading === "succeeded" && (
+                <>
+                  <Filter />
+                  <SearchBook />
+                </>
+              )}
               {books.length === 0 && bookLoading === "succeeded" && (
                 <NoBooksFound />
               )}

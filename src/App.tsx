@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import BookDetail from "./pages/BookDetails";
 import Favorites from "./pages/Favorites";
+import Success from "./pages/Success";
 
 const router = createBrowserRouter([
   {
@@ -18,16 +19,17 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Navigate to="/Nos_Livres" replace /> },
-      { path: "/Nos_Livres", element: <Books /> },
+      { index: true, element: <Navigate to="Nos_Livres" replace /> },
+      { path: "Nos_Livres", element: <Books /> },
       {
-        path: "/Nos_Livres/:title",
+        path: "Nos_Livres/:title",
         element: <BookDetail />,
       },
       { path: "À_propos", element: <About /> },
       { path: "Contact", element: <Contact /> },
       { path: "Panier", element: <Cart /> },
       { path: "Mes_favoris", element: <Favorites /> },
+      { path: "succès", element: <Success /> },
       { path: "*", element: <ErrorPage /> },
     ],
   },
