@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { BookType } from "../../type/book";
+import type { BookType } from "../../../type/book";
 
 type InitialStateType = {
   favorites: BookType[];

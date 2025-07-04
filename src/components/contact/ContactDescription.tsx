@@ -17,7 +17,7 @@ export default function ContactDescription({
           aider à découvrir de nouvelles lectures, répondre à toutes vos
           questions et partager ce qui rend notre Librairie spéciale.
         </p>
-        <hr className="my-5 w-[50%]" />
+        <hr className="my-5 w-[50%] text-amber-600 " />
         <p>
           Vous avez des questions sur notre collection ou besoin d`une
           recommandation de livre ? Nous sommes là pour vous aider ! Que vous
@@ -25,7 +25,7 @@ export default function ContactDescription({
           souhaitiez en savoir plus sur notre Librairie, n`hésitez pas à nous
           contacter. Nous serions ravis d`avoir de vos nouvelles !
         </p>
-        <hr className="my-5 w-[50%]" />
+        <hr className="my-5 w-[50%] text-amber-600" />
         <p>
           Vous pouvez également nous appeler directement via WhatsApp en
           cliquant sur le bouton en bas à droite de votre écran !

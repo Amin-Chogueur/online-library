@@ -7,7 +7,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   addTofavoritePage,
   removeFromfavoritePage,
-} from "../../store/slices/favoriteSlice";
+} from "../../store/slices/favorites/favoriteSlice";
 
 export default function Book({ book }: { book: BookType }) {
   const dispatch = useAppDispatch();

@@ -90,6 +90,7 @@ function OrderForm() {
       {orderInput.map((input) => (
         <Input key={input.lable} {...input} />
       ))}
+
       {errorPlacingOrderMessage && (
         <p className="text-red-500 text-sm text-center">
           {errorPlacingOrderMessage}

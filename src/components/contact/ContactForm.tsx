@@ -9,6 +9,8 @@ import { useState } from "react";
 import type { z } from "zod";
 import Input from "../ui/Input";
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function ContactForm({ isInView }: { isInView: boolean }) {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -35,12 +37,9 @@ export default function ContactForm({ isInView }: { isInView: boolean }) {
       setErrorMessage("");
       setSuccessMessage("");
       setLoading(true);
-      const res = await axios.post(
-        "https://ghiz-read-manager.vercel.app/api/contact",
-        {
-          clientMessageData,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/api/contact`, {
+        clientMessageData,
+      });
 
       if (res.data.status === 200) {
         setSuccessMessage(res.data.message);
@@ -106,7 +105,7 @@ export default function ContactForm({ isInView }: { isInView: boolean }) {
 
         <button
           disabled={loading}
-          className="bg-amber-600 text-white py-2 rounded-md hover:bg-amber-500 focus:outline-none w-full md:w-auto cursor-pointer disabled:bg-gray-600 flex justify-center items-center gap-2"
+          className="bg-amber-600 text-white py-2 rounded-md hover:bg-amber-700 focus:outline-none w-full md:w-auto cursor-pointer disabled:bg-gray-600 flex justify-center items-center gap-2"
           type="submit"
         >
           {loading && <FiLoader className="animate-spin" />}

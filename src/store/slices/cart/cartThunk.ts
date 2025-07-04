@@ -67,13 +67,10 @@ export const placeOrder = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const res = await axios.post(
-        "https://ghiz-read-manager.vercel.app/api/orders",
-        {
-          clientInfo,
-          cartItems,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/api/orders`, {
+        clientInfo,
+        cartItems,
+      });
 
       if (res.data.status === 200) {
         return res.data;

@@ -1,54 +1,93 @@
-# React + TypeScript + Vite
+# 📚 Bookstore Client App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive bookstore application built with **React**, **TypeScript**, and **Tailwind CSS**. This app allows users to browse a curated collection of books, filter by category, search by title, manage their favorites and cart, and place orders with cash-on-delivery. All data is powered by an API provided by the Bookstore Admin Dashboard.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔍 **Browse & Search Books**  
+  Users can explore the entire collection with:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - **Category filtering** (server-side)
+  - **Title-based search** (server-side)
+  - **Server-side pagination** for performance
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- ❤️ **Favorites Page**  
+  Users can save books to a favorites list so they don’t have to search for them again.
+
+- 🛒 **Cart Functionality**
+
+  - Add books to cart
+  - Increase/decrease quantity
+  - Remove books
+  - Submit orders with a form
+
+- 📦 **Order Placement & Success Page**
+
+  - Users submit orders via a checkout form
+  - Order is saved to the admin database
+  - On success, the app displays a detailed confirmation page (fetched from admin API)
+
+- 📄 **Book Details Page**  
+  Dynamic page showing full details of a selected book.
+
+- ✉️ **Contact Page**  
+  Users can send messages to the admin's email using the Resend API.
+
+- 👨‍💼 **About Page**  
+  Learn more about the bookstore.
+
+- ✅ **Form Validation**
+
+  - All forms (contact, cart) use **React Hook Form** + **Zod** for validation
+
+- 🎨 **Animations**  
+  Beautiful transitions and animations using **Framer Motion**
+
+- 📱 **Fully Responsive**  
+  Works seamlessly on mobile, tablet, and desktop.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: React (v19) + TypeScript
+- **Styling**: Tailwind CSS
+- **Form Handling**: React Hook Form + Zod
+- **State Management**: Redux Toolkit + Redux Persist
+- **Routing**: React Router DOM
+- **Email Service**: Resend
+- **Animations**: Framer Motion
+- **HTTP Requests**: Axios
+- **Icons**: React Icons
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/bookstore-client.git
+cd bookstore-client
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Running the App Locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm run dev
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Environment Variables
+
+VITE_BASE_URL==https://your-admin-api-url.com/api
+
+## Project Structure
+
+src/
+│
+├── components/ // Reusable UI components
+├── pages/ // Main pages (Books, BookDetail, Cart, Contact, etc.)
+├── store/ // Redux setup (slices, store)
+├── types/ // TypeScript types
+├── helpers/ // Utility functions
+├── hooks/ // Redux hooks
+└── layouts/ // main layout

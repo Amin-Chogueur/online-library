@@ -10,7 +10,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   addTofavoritePage,
   removeFromfavoritePage,
-} from "../store/slices/favoriteSlice";
+} from "../store/slices/favorites/favoriteSlice";
 import { fetchBook } from "../store/slices/book/bookThunk";
 
 export default function BookDetail() {

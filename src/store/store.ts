@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import booksReducer from "./slices/book/bookSlices";
 import categoriesReducer from "./slices/category/categorySlice";
 import cartReducer from "./slices/cart/cartSlice";
-import favoritesReducer from "./slices/favoriteSlice";
+import favoritesReducer from "./slices/favorites/favoriteSlice";
 import {
   persistStore,
   persistReducer,

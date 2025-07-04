@@ -40,7 +40,7 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             {" "}
-            <div>
+            <div className="mb-8">
               <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Bienvenue chez Ghizlene BookShop!
               </h3>
@@ -53,11 +53,11 @@ export default function About() {
                 lecteur.
               </p>
             </div>
-            <div>
+            <div className="mb-8">
               <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Pourquoi Nous Choisir ?
               </h3>
-              <ul className="space-y-6">
+              <ul className="space-y-4">
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
                     <span className="font-bold text-amber-500">
@@ -94,7 +94,7 @@ export default function About() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="mb-8">
               <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
                 Rejoignez Notre Communauté !
               </h3>
@@ -102,7 +102,9 @@ export default function About() {
                 Nous vous invitons à parcourir notre collection en ligne et à
                 découvrir le plaisir de la lecture. Si vous avez des questions
                 ou besoin d'assistance, n'hésitez pas à nous contacter !
-                Remplissez notre formulaire de contact et connectons-nous. Votre
+                Remplissez notre formulaire de contact et connectons-nous. Vous
+                pouvez également nous appeler directement via WhatsApp en
+                cliquant sur le bouton en bas à droite de votre écran. Votre
                 voyage dans le monde des livres commence ici, et nous avons hâte
                 d'en faire partie.
               </p>
