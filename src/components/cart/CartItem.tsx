@@ -58,7 +58,7 @@ export default function CartItem({ item }: { item: BookType }) {
           <p className="text-red-500 text-sm">{error.message}</p>
         )}
         <p className="text-sm text-gray-300 mt-1 flex items-center gap-1">
-          <span>Quantity:</span>
+          <span>Quantité:</span>
           <span className="font-medium">{item.quantityInCart}</span>
         </p>
 
