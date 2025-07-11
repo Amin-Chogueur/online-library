@@ -80,8 +80,8 @@ export default function Filter() {
               hover:bg-gray-700 hover:text-amber-50
               ${
                 selectedCategory === "All"
-                  ? "bg-amber-600 text-white border-amber-700 font-medium dark:bg-amber-700 dark:border-amber-800"
-                  : " text-amber-800  bg-gray-700 dark:text-gray-200 border-gray-600"
+                  ? " text-white  font-medium bg-amber-700 border-amber-800"
+                  : "   bg-gray-700 text-gray-200 border-gray-600"
               }`}
         >
           Tous
