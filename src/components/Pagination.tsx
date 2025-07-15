@@ -13,8 +13,6 @@ export default function Pagination() {
   const prevPage = page > 1 ? page - 1 : 1;
   const nextPage = page < totalPages ? page + 1 : totalPages;
 
-  const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
-
   function navigateToPage(newPage: number) {
     const params = new URLSearchParams(searchParams);
     params.set("page", String(newPage));
@@ -36,22 +34,9 @@ export default function Pagination() {
       </button>
 
       {/* Page Numbers */}
-      <div className="flex gap-1 mx-2">
-        {pagesArray.map((ele) => (
-          <button
-            onClick={() => navigateToPage(ele)}
-            key={ele}
-            className={`cursor-pointer w-10 h-10 rounded-md text-sm font-medium transition
-              ${
-                page === ele
-                  ? " text-white bg-amber-600"
-                  : "bg-gray-700  text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
-          >
-            {ele}
-          </button>
-        ))}
-      </div>
+      <p className="text-center mx-3">
+        page {page} sur {totalPages}
+      </p>
 
       {/* Next Button */}
       <button
