@@ -8,10 +8,10 @@ import {
   incresseQuantity,
   removeFromCart,
 } from "../../store/slices/cart/cartSlice";
-import type { BookType } from "../../type/book";
-import { fetchBooksInCart } from "../../store/slices/cart/cartThunk";
+import type { ProductType } from "../../type/product";
+import { fetchProductsInCart } from "../../store/slices/cart/cartThunk";
 
-export default function CartItem({ item }: { item: BookType }) {
+export default function CartItem({ item }: { item: ProductType }) {
   const error = useAppSelector((state) => state.cart.error);
 
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ export default function CartItem({ item }: { item: BookType }) {
   function handleRemoveItemFromCart() {
     dispatch(removeFromCart(item._id));
     //i refetch books cus the ids in the cart was changed so i can kepp the  books in cart page updated
-    dispatch(fetchBooksInCart());
+    dispatch(fetchProductsInCart());
   }
 
   return (

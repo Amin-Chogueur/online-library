@@ -32,8 +32,8 @@ export type Order = {
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const fetchBooksInCart = createAsyncThunk(
-  "cart/fetchBooksInCart",
+export const fetchProductsInCart = createAsyncThunk(
+  "cart/fetchProductsInCart",
   async (_, { rejectWithValue, getState }) => {
     try {
       // i get the ids here instead of geting them in the cart page  so i can fetch the books only once in the first render and whenever the user update the items quantity in the cart there is no need to refetch the books and if user remove item from cart , there i refetch the books again by dispatch this action in the remove button in the cartItem component for butter ux

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { ItemType } from "../../../type/cart";
 
-import type { BookType } from "../../../type/book";
+import type { ProductType } from "../../../type/product";
 
-import { fetchBooksInCart, placeOrder } from "./cartThunk";
+import { fetchProductsInCart, placeOrder } from "./cartThunk";
 
 type OrderItem = {
   _id: string;
@@ -32,12 +32,12 @@ export type Order = {
 };
 
 type InitialStateType = {
-  booksInCart: BookType[];
+  productsInCart: ProductType[];
   cart: ItemType[];
   item: ItemType | null;
   error: { id: string; message: string } | null;
-  booksInCartLoading: "idle" | "pending" | "succeeded" | "failed";
-  booksInCartError: null | string;
+  productsInCartLoading: "idle" | "pending" | "succeeded" | "failed";
+  productsInCartError: null | string;
   loadingPlacingOrder: "idle" | "pending" | "succeeded" | "failed";
   errorPlacingOrderMessage: string;
   successPlacingOrderMessage: string;
@@ -45,12 +45,12 @@ type InitialStateType = {
 };
 
 const initialState: InitialStateType = {
-  booksInCart: [],
+  productsInCart: [],
   cart: [],
   item: null,
   error: null,
-  booksInCartLoading: "idle",
-  booksInCartError: "",
+  productsInCartLoading: "idle",
+  productsInCartError: "",
   loadingPlacingOrder: "idle",
   errorPlacingOrderMessage: "",
   successPlacingOrderMessage: "",
@@ -98,7 +98,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
-      fetchBooksInCart();
+      fetchProductsInCart();
     },
     clearCart: (state) => {
       state.cart = [];
@@ -112,16 +112,16 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder //'fetch all books without pagination'
-      .addCase(fetchBooksInCart.pending, (state) => {
-        state.booksInCartLoading = "pending";
+      .addCase(fetchProductsInCart.pending, (state) => {
+        state.productsInCartLoading = "pending";
       })
-      .addCase(fetchBooksInCart.fulfilled, (state, action) => {
-        state.booksInCartLoading = "succeeded";
-        state.booksInCart = action.payload.booksInCart;
+      .addCase(fetchProductsInCart.fulfilled, (state, action) => {
+        state.productsInCartLoading = "succeeded";
+        state.productsInCart = action.payload.productsInCart;
       })
-      .addCase(fetchBooksInCart.rejected, (state, action) => {
-        state.booksInCartLoading = "failed";
-        state.booksInCartError = action.payload as string;
+      .addCase(fetchProductsInCart.rejected, (state, action) => {
+        state.productsInCartLoading = "failed";
+        state.productsInCartError = action.payload as string;
       })
       //place Order
       .addCase(placeOrder.pending, (state) => {

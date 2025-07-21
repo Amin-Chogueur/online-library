@@ -45,12 +45,14 @@ export default function About() {
                 Bienvenue chez Ghizlene BookShop!
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Chez Ghizlene BookShop, nous croyons que chaque livre ouvre une
-                nouvelle porte vers l'aventure, le savoir et l'inspiration.
-                Notre collection soigneusement sélectionnée propose une large
-                gamme de genres, des classiques intemporels aux derniers
-                best-sellers, garantissant qu'il y a un livre pour chaque
-                lecteur.
+                Chez Ghizlene BookShop, nous croyons que chaque objet – qu’il
+                s’agisse d’un livre, d’un jeu, d’un article de papeterie ou d’un
+                petit cadeau – peut ouvrir la porte à une aventure, à
+                l’imagination et à la découverte. Notre collection soigneusement
+                sélectionnée propose un large éventail de produits : des livres
+                pour tous les âges, des histoires captivantes pour enfants, de
+                la papeterie élégante, des jeux amusants et des idées cadeaux
+                pour toutes les occasions.
               </p>
             </div>
             <div className="mb-8">
@@ -61,35 +63,34 @@ export default function About() {
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
                     <span className="font-bold text-amber-500">
-                      Large Sélection :
+                      Offre variée :
                     </span>{" "}
-                    Découvrez notre vaste choix de livres pour tous les goûts et
-                    tous les âges. Que vous soyez fan de fiction, non-fiction,
-                    littérature jeunesse, ou développement personnel, nous avons
-                    le livre parfait qui vous attend.
+                    Découvrez notre sélection unique de livres, papeterie, jeux
+                    et cadeaux. Que vous soyez passionné de fiction, de
+                    littérature jeunesse, d’organisation créative ou que vous
+                    cherchiez un jeu à offrir, vous trouverez forcément ce qu’il
+                    vous faut.
                   </p>
                 </li>
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
                     <span className="font-bold text-amber-500">
-                      Expérience Personnalisée :
+                      Expérience personnalisée :
                     </span>{" "}
-                    Notre équipe passionnée est dédiée à vous aider à trouver
-                    votre prochaine lecture préférée. Nous sommes toujours là
-                    pour vous fournir des recommandations adaptées à vos
-                    intérêts.
+                    Notre équipe passionnée est là pour vous guider, vous
+                    conseiller et vous aider à trouver le livre idéal, le cadeau
+                    parfait ou les fournitures qui vous inspirent.
                   </p>
                 </li>
                 <li>
                   <p className="text-lg text-gray-300 leading-relaxed">
                     <span className="font-bold text-amber-500">
-                      Focalisation sur la Communauté :
+                      Un esprit communautaire:
                     </span>{" "}
-                    Nous sommes bien plus qu'une simple librairie ; nous sommes
-                    un lieu de rencontre pour les amoureux des livres.
-                    Rejoignez-nous pour des événements passionnants, des séances
-                    de dédicaces et des groupes de lecture qui favorisent les
-                    échanges et enrichissent les discussions.
+                    Ghizlene BookShop, c’est plus qu’une boutique : c’est un
+                    lieu de partage. Participez à nos événements, ateliers
+                    créatifs, séances de lecture et découvrez une communauté de
+                    passionnés.
                   </p>
                 </li>
               </ul>

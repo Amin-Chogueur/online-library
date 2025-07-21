@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { fetchBooks } from "../../store/slices/book/bookThunk";
 
-export default function SearchBook() {
+export default function SearchProduct() {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState("");
   function handleSearch(e: FormEvent) {

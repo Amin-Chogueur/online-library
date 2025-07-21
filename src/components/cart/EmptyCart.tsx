@@ -10,10 +10,11 @@ export default function EmptyCart() {
         Votre panier est vide!
       </h2>
       <p className="text-gray-400 max-w-md mx-auto">
-        Parcourez notre collection et trouvez des livres qui vous intéressent.
+        Parcourez notre collection et trouvez les livres, articles de papeterie,
+        jeux et cadeaux qui vous inspirent.
       </p>
       <Link
-        to={"/Nos_Livres"}
+        to={"/"}
         className="mt-4 flex items-center justify-center px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-600 rounded-lg font-medium hover:from-amber-700 hover:to-amber-700 transition-all cursor-pointer"
       >
         <FaBookOpen className="mr-2" />

@@ -8,13 +8,14 @@ function Header() {
   const cart = useAppSelector((state) => state.cart.cart);
   const totalQuantity = cart.reduce((acu, cur) => acu + cur.quantityInCart, 0);
   return (
-    <header className="fixed z-10 h-[60px] w-[90%] bg-gray-400 md:opacity-85 rounded-lg top-[20px] left-[5%] flex justify-between items-center px-[20px] py-[10px]">
+    <header className="fixed z-10 h-[60px] w-[96%] bg-gray-400 md:opacity-85 rounded-lg top-[20px] left-[2%] flex  justify-between items-center px-[20px] py-[10px] ">
       <Link to={"/"} className="bg-gray-900 p-1 rounded-full">
         <img src={"/logoBook1.png"} width={60} height={60} alt="logo" />
       </Link>
-      <div className="flex items-center gap-3">
-        <DesktopNav />
 
+      <DesktopNav />
+
+      <div className="flex items-center  gap-3">
         <MobileNav />
         <Link
           to="/Panier"

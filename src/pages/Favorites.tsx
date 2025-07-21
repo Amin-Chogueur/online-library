@@ -2,9 +2,9 @@ import { useRef } from "react";
 import EmptyFavoritesPage from "../components/favorites/EmptyFavoritesPage";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { motion, useInView } from "framer-motion";
-import Book from "../components/book/Book";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+import Product from "../components/product/Product";
 
 export default function Favorites() {
   const ref = useRef(null);
@@ -28,14 +28,14 @@ export default function Favorites() {
             Mes Livres Favoris
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {favorites.map((book, i) => (
+            {favorites.map((product, i) => (
               <motion.div
-                key={book._id}
+                key={product._id}
                 initial={{ opacity: 0, y: 20 }} // Initial state
                 animate={isInView ? { opacity: 1, y: 0 } : {}} // Animate only if section is in view
                 transition={{ duration: 1, delay: i * 0.5 }} // Delay for staggered effect
               >
-                <Book book={book} />
+                <Product product={product} category="Mes_favoris" />
               </motion.div>
             ))}
           </div>

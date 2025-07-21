@@ -1,25 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-type FetchBooksParams = {
+type FetchGamesAndGiftsParams = {
   page: number;
-  selectedCategory: string;
   title?: string;
 };
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const fetchBooks = createAsyncThunk(
-  "Books/fetchBooks",
-  async (
-    { page, selectedCategory, title }: FetchBooksParams,
-    { rejectWithValue }
-  ) => {
+export const fetchGamesAndGifts = createAsyncThunk(
+  "GamesAndGifts/fetchGamesAndGifts",
+  async ({ page, title }: FetchGamesAndGiftsParams, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/products/novel`, {
+      const res = await axios.get(`${BASE_URL}/api/products/gamesAndGifts`, {
         params: {
           title,
-          category: selectedCategory,
           page,
         },
       });
@@ -35,12 +30,12 @@ export const fetchBooks = createAsyncThunk(
     }
   }
 );
-export const fetchBook = createAsyncThunk(
-  "Books/fetchBook",
+export const fetchGameAndGift = createAsyncThunk(
+  "GamesAndGifts/fetchGameAndGift",
   async (title: string, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${BASE_URL}/api/products/${title}`);
-      console.log(res.data);
+
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

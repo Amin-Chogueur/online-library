@@ -12,7 +12,6 @@ export default function Filter() {
   const selectedCategory = searchParams.get("category") || "All";
 
   const { categories, loading } = useAppSelector((state) => state.categories);
-
   const navigateToPage = (selectedCategory: string) => {
     if (selectedCategory === "") {
       return;

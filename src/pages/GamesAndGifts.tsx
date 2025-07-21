@@ -4,32 +4,32 @@ import { motion, useInView } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
-import SearchBook from "../components/product/SearchProduct";
-import NoBooksFound from "../components/product/NoProductFound";
-import Filter from "../components/product/Filter";
-import { fetchBooks } from "../store/slices/book/bookThunk";
+import { fetchGamesAndGifts } from "../store/slices/gamesAndGifts/gamesAndGiftsThunk";
 import Product from "../components/product/Product";
+import NoProductFound from "../components/product/NoProductFound";
 
-export default function Books() {
+export default function GamesAndGifts() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
-  const { books, bookLoading, error } = useAppSelector((state) => state.books);
+  const { gamesAndGifts, gamesAndGiftsLoading, error } = useAppSelector(
+    (state) => state.gamesAndGifts
+  );
+  console.log(gamesAndGifts);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
-  const selectedCategory = searchParams.get("category") || "All";
 
   useEffect(() => {
-    dispatch(fetchBooks({ page, selectedCategory }));
-  }, [dispatch, page, selectedCategory]);
+    dispatch(fetchGamesAndGifts({ page }));
+  }, [dispatch, page]);
 
   return (
     <div ref={ref}>
       <div className="min-h-screen px-2 py-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl  mb-12 font-bold text-amber-500 text-center">
-            Découvrez notre collection de livres et romans
+            Des jeux pour tous – des cadeaux pour chacun
           </h1>
           {error ? (
             <div className="text-red-500 text-center space-y-4">
@@ -43,29 +43,27 @@ export default function Books() {
             </div>
           ) : (
             <div>
-              <Filter />
-              <SearchBook />
-
-              {books.length === 0 && bookLoading === "succeeded" && (
-                <NoBooksFound />
-              )}
-              {bookLoading === "pending" ? (
+              {gamesAndGifts?.length === 0 &&
+                gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
+              {gamesAndGiftsLoading === "pending" ? (
                 <Spinner />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                  {books.map((book, i) => (
+                  {gamesAndGifts.map((book, i) => (
                     <motion.div
                       key={book._id}
                       initial={{ opacity: 0, y: 20 }} // Initial state
                       animate={isInView ? { opacity: 1, y: 0 } : {}} // Animate only if section is in view
                       transition={{ duration: 1, delay: i * 0.5 }} // Delay for staggered effect
                     >
-                      <Product product={book} category="Nos_Livres" />
+                      <Product product={book} category="Jeux-Cadeaux" />
                     </motion.div>
                   ))}
                 </div>
               )}
-              {books.length > 0 && <Pagination component="Nos livres" />}
+              {gamesAndGifts.length > 0 && (
+                <Pagination component="Jeux-Cadeaux" />
+              )}
             </div>
           )}
         </div>

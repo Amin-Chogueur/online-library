@@ -5,8 +5,20 @@ export default function DesktopNav() {
   const favorites = useAppSelector((state) => state.favorites.favorites);
   const totalFavoritesBook = favorites.length;
   return (
-    <nav className="hidden md:block">
+    <nav className="hidden xl:block">
       <ul className="flex gap-3 items-center text-[18px]">
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            Accueil
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to="/Nos_Livres"
@@ -17,6 +29,42 @@ export default function DesktopNav() {
             }
           >
             Nos Livres
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/Enfance"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            Enfance
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/Jeux-Cadeaux"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            Jeux & cadeaux
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/Papeterie"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            Papeterie
           </NavLink>
         </li>
         <li>

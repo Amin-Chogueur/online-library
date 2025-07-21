@@ -13,9 +13,13 @@ export default function ContactDescription({
     >
       <div className="  text-xl ">
         <p>
-          Merci de visiter notre collection de livres ! Nous sommes là pour vous
-          aider à découvrir de nouvelles lectures, répondre à toutes vos
-          questions et partager ce qui rend notre Librairie spéciale.
+          Merci de visiter{" "}
+          <span className="text-amber-500 font-medium">Ghizlene BookShop</span>{" "}
+          ! Nous sommes là pour vous aider à découvrir de nouvelles lectures, à
+          choisir des articles de papeterie inspirants, à trouver des jeux
+          amusants ou des cadeaux parfaits pour vos proches. N’hésitez pas à
+          nous poser vos questions ou à explorer ce qui rend notre boutique si
+          spéciale.
         </p>
         <hr className="my-5 w-[50%] text-amber-600 " />
         <p>

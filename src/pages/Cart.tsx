@@ -7,19 +7,19 @@ import { FiShoppingCart } from "react-icons/fi";
 import OrderSummary from "../components/cart/OrderSummary";
 import OrderForm from "../components/cart/OrderForm";
 import EmptyCart from "../components/cart/EmptyCart";
-import { fetchBooksInCart } from "../store/slices/cart/cartThunk";
 import Spinner from "../components/ui/Spinner";
+import { fetchProductsInCart } from "../store/slices/cart/cartThunk";
 
 export default function Cart() {
   const dispatch = useAppDispatch();
-  const { cart, booksInCart, booksInCartLoading } = useAppSelector(
+  const { cart, productsInCart, productsInCartLoading } = useAppSelector(
     (state) => state.cart
   );
-
-  const cartItems = booksInCart.map((book) => {
-    const cartItem = cart.find((item) => item._id === book._id);
+  console.log(productsInCart);
+  const cartItems = productsInCart.map((product) => {
+    const cartItem = cart.find((item) => item._id === product._id);
     return {
-      ...book,
+      ...product,
       quantityInCart: cartItem?.quantityInCart || 0,
     };
   });
@@ -30,13 +30,13 @@ export default function Cart() {
   );
 
   useEffect(() => {
-    dispatch(fetchBooksInCart());
+    dispatch(fetchProductsInCart());
   }, [dispatch]);
   return (
     <div className="min-h-[100vh] pt-[10px] pb-24  ">
       <h1 className="text-amber-500 text-3xl font-bold text-center mb-8">
         <FiShoppingCart className="text-4xl inline mr-2" />
-        <span>Livres dans votre panier</span>
+        <span>Articles dans votre panier</span>
       </h1>
 
       {cart.length > 0 ? (
@@ -44,7 +44,7 @@ export default function Cart() {
           {/* Cart Items Section */}
           <div className="lg:w-[70%]">
             <div className="flex flex-col gap-4 mb-6">
-              {booksInCartLoading === "pending" ? (
+              {productsInCartLoading === "pending" ? (
                 <Spinner />
               ) : (
                 cartItems.map((item) => (

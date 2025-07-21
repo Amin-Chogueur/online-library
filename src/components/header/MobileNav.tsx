@@ -8,11 +8,24 @@ export default function MobileNav() {
   const favorites = useAppSelector((state) => state.favorites.favorites);
   const totalFavoritesBook = favorites.length;
   return (
-    <div className="md:hidden">
+    <div className="xl:hidden">
       {" "}
       {isOpen && (
         <nav className=" absolute z-10 w-full left-0 top-[54px] h-fit p-[10px] rounded-bl-[5px] rounded-br-[5px] bg-gray-400  ">
           <ul className="flex flex-col justify-center text-[18px] items-center gap-[20px] ">
+            <li className="w-full">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Accueil
+              </NavLink>
+            </li>
             <li className="w-full">
               <NavLink
                 to="/Nos_Livres"
@@ -24,6 +37,45 @@ export default function MobileNav() {
                 onClick={() => setIsOpen(false)}
               >
                 Nos Livres
+              </NavLink>
+            </li>
+            <li className="w-full">
+              <NavLink
+                to="/Enfance"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Enfance
+              </NavLink>
+            </li>
+            <li className="w-full">
+              <NavLink
+                to="/Jeux-Cadeaux"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Jeux & Cadeaux
+              </NavLink>
+            </li>
+            <li className="w-full">
+              <NavLink
+                to="/Papeterie"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Papeterie
               </NavLink>
             </li>
             <li className="w-full">
@@ -74,7 +126,7 @@ export default function MobileNav() {
           </ul>
         </nav>
       )}
-      <div className="flex items-center gap-3">
+      <div className="flex items-end gap-3">
         {isOpen ? (
           <span
             className={`text-amber-600 text-2xl cursor-pointer`}

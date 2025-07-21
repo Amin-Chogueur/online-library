@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import type { BookType } from "../../type/book";
 import { formatCurency } from "../../helpers/formatCurency";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { addToCart } from "../../store/slices/cart/cartSlice";
@@ -8,31 +7,43 @@ import {
   addTofavoritePage,
   removeFromfavoritePage,
 } from "../../store/slices/favorites/favoriteSlice";
+import type { ProductType } from "../../type/product";
 
-export default function Book({ book }: { book: BookType }) {
+type ProductPropsType = {
+  product: ProductType;
+  category:
+    | "Enfance"
+    | "Nos_Livres"
+    | "Jeux-Cadeaux"
+    | "Papeterie"
+    | "Mes_favoris";
+};
+
+export default function Product({ product, category }: ProductPropsType) {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
   const favorites = useAppSelector((state) => state.favorites.favorites);
-  const isInFavorites = favorites.find((item) => item._id === book._id);
-  const isInCart = cart.find((item) => item._id === book._id);
+  const isInFavorites = favorites.find((item) => item._id === product._id);
+  const isInCart = cart.find((item) => item._id === product._id);
 
   function handleAdToCart(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault(); // prevents the <Link> default action
     e.stopPropagation();
-    dispatch(addToCart(book._id));
+    dispatch(addToCart(product._id));
   }
+  const link = `/${category}/${product.title.replace(/ /g, "_")}`;
 
   return (
     <div
-      key={book._id}
+      key={product._id}
       className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-[550px]"
     >
       <div className="h-64 overflow-hidden">
         <img
           width={350}
           height={300}
-          src={book.image}
-          alt={book.title}
+          src={product.image}
+          alt={product.title}
           className="w-full h-full  hover:scale-105 transition-transform duration-300"
         />
       </div>
@@ -40,18 +51,18 @@ export default function Book({ book }: { book: BookType }) {
       <div className="p-4 flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <h2 className="text-lg font-semibold text-amber-400 mb-2 line-clamp-2">
-            {book.title}
+            {product.title}
           </h2>
           {isInFavorites ? (
             <button
-              onClick={() => dispatch(removeFromfavoritePage(book._id))}
+              onClick={() => dispatch(removeFromfavoritePage(product._id))}
               className="text-2xl focus:outline-none cursor-pointer"
             >
               <FaHeart className="text-red-500" />
             </button>
           ) : (
             <button
-              onClick={() => dispatch(addTofavoritePage(book))}
+              onClick={() => dispatch(addTofavoritePage(product))}
               className="text-2xl focus:outline-none cursor-pointer"
             >
               <FaRegHeart className="text-white hover:text-red-500" />
@@ -59,23 +70,27 @@ export default function Book({ book }: { book: BookType }) {
           )}
         </div>
 
-        <p className="text-sm text-gray-300 mb-1">par {book.author}</p>
+        <p className="text-sm text-gray-300 mb-1">par {product.author}</p>
 
         {/* 🆕 Category display */}
         <p className="text-xs text-purple-300 mb-1 italic">
-          Catégorie : {book.category.name}
+          Catégorie : {product.category.name}
         </p>
 
-        <p className="text-xs text-gray-400 mb-3">{book.numberOfPages} pages</p>
+        {product.numberOfPages && (
+          <p className="text-xs text-gray-400 mb-3">
+            {product.numberOfPages} pages
+          </p>
+        )}
 
         <div className="mt-auto">
           <span className="text-lg font-bold text-teal-400">
-            {formatCurency(book.price)}
+            {formatCurency(product.price)}
           </span>
         </div>
         <div className="flex flex-col gap-3 mt-5">
           <Link
-            to={`/Nos_Livres/${book.title.replace(/ /g, "_")}`}
+            to={link}
             className="px-4 py-2.5 rounded-lg font-medium text-sm tracking-wide flex items-center justify-center
              bg-amber-700 hover:bg-amber-600 text-white shadow hover:shadow-md
              focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
@@ -97,7 +112,7 @@ export default function Book({ book }: { book: BookType }) {
             Plus de détails
           </Link>
 
-          {book.quantity > 0 && (
+          {product.quantity > 0 && (
             <button
               disabled={isInCart ? true : false}
               onClick={handleAdToCart}

@@ -1,11 +1,11 @@
-import type { BookType } from "../../../type/book";
+import type { ProductType } from "../../../type/product";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchBook, fetchBooks } from "./bookThunk";
 
 // Define a type for the slice state
 type InitialStateType = {
-  books: BookType[];
-  book: BookType | null;
+  books: ProductType[];
+  book: ProductType | null;
   totalBooks: number;
   totalPages: number;
   bookLoading: "idle" | "pending" | "succeeded" | "failed";
@@ -50,7 +50,7 @@ export const bookSlice = createSlice({
       })
       .addCase(fetchBook.fulfilled, (state, action) => {
         state.bookLoading = "succeeded";
-        state.book = action.payload.book;
+        state.book = action.payload.product;
       })
       .addCase(fetchBook.rejected, (state, action) => {
         state.bookLoading = "failed";

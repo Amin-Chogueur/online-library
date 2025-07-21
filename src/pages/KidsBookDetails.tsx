@@ -3,16 +3,19 @@ import Spinner from "../components/ui/Spinner";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useEffect } from "react";
 
-import { fetchBook } from "../store/slices/book/bookThunk";
+import { fetchKidsBook } from "../store/slices/kidsBook/kidsBookThunk";
 import ProductDetails from "../components/product/ProductDetails";
 import { FiArrowLeft } from "react-icons/fi";
 
-export default function BookDetails() {
+export default function KidsBookDetails() {
   const dispatch = useAppDispatch();
   const { title } = useParams();
-  const { book, bookLoading } = useAppSelector((state) => state.books);
+  const { KidsBook: book, kidsBookLoading } = useAppSelector(
+    (state) => state.kidsBook
+  );
+
   useEffect(() => {
-    dispatch(fetchBook(title as string));
+    dispatch(fetchKidsBook(title as string));
   }, [dispatch, title]);
   return (
     <div className=" max-w-5xl mx-auto  text-gray-100 mb-[20px]">
@@ -28,12 +31,12 @@ export default function BookDetails() {
           ou par téléphone pour le commander.
         </h2>
       )}
-      {bookLoading === "pending" ? (
+      {kidsBookLoading === "pending" ? (
         <Spinner />
       ) : (
         <>
           <Link
-            to={"/Nos_Livres"}
+            to={"/Enfance"}
             className="flex gap-2 items-center mb-4 text-amber-500 underline"
           >
             <FiArrowLeft size={24} />
