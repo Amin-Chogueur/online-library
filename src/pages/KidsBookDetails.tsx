@@ -36,7 +36,7 @@ export default function KidsBookDetails() {
       ) : (
         <>
           <Link
-            to={"/Enfance"}
+            to={"/Enfants"}
             className="flex gap-2 items-center mb-4 text-amber-500 underline"
           >
             <FiArrowLeft size={24} />

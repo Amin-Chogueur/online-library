@@ -61,9 +61,11 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               par {product.author}
             </p>
           )}
-          <p className="text-sm text-purple-300 mb-4 font-medium">
-            Catégorie : {product.category.name}
-          </p>
+          {product.subCategory?.name && (
+            <p className="text-sm text-purple-300 mb-4 ">
+              Catégorie : {product.subCategory?.name}
+            </p>
+          )}
           {product.description && (
             <p className="text-gray-200 mb-6">{product.description}</p>
           )}
@@ -75,9 +77,16 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 {product.numberOfPages}
               </div>
             )}
-            <div>
-              <span className="font-semibold text-gray-400">Prix: </span>
-              {formatCurency(product.price)}
+            <div className="font-bold">
+              <span className={`font-semibold text-gray-400`}>Prix : </span>
+              <span
+                className={`${product?.productStatus === "Promotion" ? "line-through decoration-red-500" : ""}`}
+              >
+                {formatCurency(product.price)}
+              </span>{" "}
+              {product.promoPrice ? (
+                <span> / {formatCurency(product.promoPrice)}</span>
+              ) : null}
             </div>
           </div>
           {product.quantity > 0 && (

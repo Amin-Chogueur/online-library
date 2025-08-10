@@ -59,14 +59,16 @@ function Slider() {
               alt={`Slide ${slide.id}`}
               style={{ objectFit: "cover" }}
             />
-            <div className="bg-gray-900 p-4 rounded-[50px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <h3 className=" text-amber-500 text-lg sm:text-3xl lg:text-5xl sm:mb-5  text-center">
-                {slide.imageTitle}
-              </h3>
-              <p className="text-lg hidden sm:block text-center">
-                {slide.imageDes}
-              </p>
-            </div>
+            {slide.imageDes && (
+              <div className="bg-gray-900 p-4 rounded-[50px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <h3 className=" text-amber-500 text-lg sm:text-3xl lg:text-5xl sm:mb-5  text-center">
+                  {slide.imageTitle}
+                </h3>
+                <p className="text-lg hidden sm:block text-center">
+                  {slide.imageDes}
+                </p>
+              </div>
+            )}
           </div>
         ))}
       </div>

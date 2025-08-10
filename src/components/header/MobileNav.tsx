@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const favorites = useAppSelector((state) => state.favorites.favorites);
-  const totalFavoritesBook = favorites.length;
+
   return (
     <div className="xl:hidden">
       {" "}
@@ -41,7 +39,7 @@ export default function MobileNav() {
             </li>
             <li className="w-full">
               <NavLink
-                to="/Enfance"
+                to="/Enfants"
                 className={({ isActive }) =>
                   `block w-full p-2 rounded-lg text-center ${
                     isActive ? "bg-amber-600" : "bg-gray-900"
@@ -49,7 +47,7 @@ export default function MobileNav() {
                 }
                 onClick={() => setIsOpen(false)}
               >
-                Enfance
+                Enfants
               </NavLink>
             </li>
             <li className="w-full">
@@ -78,24 +76,7 @@ export default function MobileNav() {
                 Papeterie
               </NavLink>
             </li>
-            <li className="w-full">
-              <NavLink
-                to="/Mes_favoris"
-                className={({ isActive }) =>
-                  `block w-full p-2 rounded-lg text-center relative ${
-                    isActive ? "bg-amber-600" : "bg-gray-900"
-                  }`
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                {favorites.length > 0 && (
-                  <span className="absolute bg-red-600 w-4 h-4 flex justify-center items-center top-[-8px] right-[-3px] rounded-full">
-                    {totalFavoritesBook}
-                  </span>
-                )}
-                Mes favoris
-              </NavLink>
-            </li>
+
             <li className="w-full">
               <NavLink
                 to="/À_propos"

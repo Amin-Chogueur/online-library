@@ -3,6 +3,8 @@ import axios from "axios";
 
 type FetchGamesAndGiftsParams = {
   page: number;
+  selectedSubCategory?: string;
+  productStatus?: string | undefined;
   title?: string;
 };
 
@@ -10,11 +12,22 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const fetchGamesAndGifts = createAsyncThunk(
   "GamesAndGifts/fetchGamesAndGifts",
-  async ({ page, title }: FetchGamesAndGiftsParams, { rejectWithValue }) => {
+  async (
+    {
+      page,
+      selectedSubCategory,
+      title,
+      productStatus,
+    }: FetchGamesAndGiftsParams,
+    { rejectWithValue }
+  ) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/products/gamesAndGifts`, {
+      const res = await axios.get(`${BASE_URL}/api/products`, {
         params: {
           title,
+          category: "Jeux et Cadeaux",
+          subCategory: selectedSubCategory,
+          productStatus: productStatus,
           page,
         },
       });

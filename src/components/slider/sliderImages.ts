@@ -29,7 +29,7 @@ export const slides = [
   },
   {
     id: "5",
-    image: "/books6.jpg",
+    image: "/books7.jpg",
     imageTitle: "Hé les Enfants, l'Aventure Vous Attend à Chaque Page !",
     imageDes:
       "Rejoignez-nous dans un monde de plaisir, de magie et d'imagination infinie. Découvrez des histoires conçues pour les petits explorateurs !",

@@ -3,7 +3,8 @@ import axios from "axios";
 
 type FetchBooksParams = {
   page: number;
-  selectedCategory: string;
+  selectedSubCategory?: string;
+  productStatus?: string | undefined;
   title?: string;
 };
 
@@ -12,14 +13,16 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const fetchBooks = createAsyncThunk(
   "Books/fetchBooks",
   async (
-    { page, selectedCategory, title }: FetchBooksParams,
+    { page, selectedSubCategory, title, productStatus }: FetchBooksParams,
     { rejectWithValue }
   ) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/products/novel`, {
+      const res = await axios.get(`${BASE_URL}/api/products`, {
         params: {
           title,
-          category: selectedCategory,
+          category: "Romans",
+          subCategory: selectedSubCategory,
+          productStatus: productStatus,
           page,
         },
       });
@@ -40,7 +43,6 @@ export const fetchBook = createAsyncThunk(
   async (title: string, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${BASE_URL}/api/products/${title}`);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

@@ -10,6 +10,7 @@ type OrderItem = {
   title: string;
   category: string;
   price: number;
+  promoPrice?: number;
   quantityInCart: number;
 };
 

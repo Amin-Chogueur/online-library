@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { formatCurency } from "../../helpers/formatCurency";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { addToCart } from "../../store/slices/cart/cartSlice";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaTag } from "react-icons/fa";
+import { IoBookSharp } from "react-icons/io5";
 import {
   addTofavoritePage,
   removeFromfavoritePage,
@@ -12,7 +13,7 @@ import type { ProductType } from "../../type/product";
 type ProductPropsType = {
   product: ProductType;
   category:
-    | "Enfance"
+    | "Enfants"
     | "Nos_Livres"
     | "Jeux-Cadeaux"
     | "Papeterie"
@@ -32,19 +33,31 @@ export default function Product({ product, category }: ProductPropsType) {
     dispatch(addToCart(product._id));
   }
   const link = `/${category}/${product.title.replace(/ /g, "_")}`;
-
+  console.log(product);
   return (
     <div
       key={product._id}
-      className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-[550px]"
+      className="bg-gray-800 relative rounded-xl  shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-[550px] pt-8"
     >
+      {product.productStatus === "Promotion" && (
+        <span className="bg-red-700 flex justify-center items-center p-1 rounded-2xl w-[80%]  absolute top-[-15px] z-20 left-1/2 -translate-x-1/2 gap-2">
+          <FaTag /> {product.productStatus} <FaTag />
+        </span>
+      )}
+      {product.productStatus === "Nouveau" && (
+        <span className="bg-green-500 flex justify-center items-center p-1 rounded-2xl w-[80%]  absolute top-[-15px] z-20 left-1/2 -translate-x-1/2 gap-2">
+          <IoBookSharp />
+          {product.productStatus} <IoBookSharp />
+        </span>
+      )}
+
       <div className="h-64 overflow-hidden">
         <img
-          width={350}
+          width={150}
           height={300}
           src={product.image}
           alt={product.title}
-          className="w-full h-full  hover:scale-105 transition-transform duration-300"
+          className="mx-auto h-full  hover:scale-105 transition-transform duration-300"
         />
       </div>
 
@@ -70,12 +83,9 @@ export default function Product({ product, category }: ProductPropsType) {
           )}
         </div>
 
-        <p className="text-sm text-gray-300 mb-1">par {product.author}</p>
-
-        {/* 🆕 Category display */}
-        <p className="text-xs text-purple-300 mb-1 italic">
-          Catégorie : {product.category.name}
-        </p>
+        {product.author && (
+          <p className="text-sm text-gray-300 mb-1">par {product.author}</p>
+        )}
 
         {product.numberOfPages && (
           <p className="text-xs text-gray-400 mb-3">
@@ -83,10 +93,18 @@ export default function Product({ product, category }: ProductPropsType) {
           </p>
         )}
 
-        <div className="mt-auto">
-          <span className="text-lg font-bold text-teal-400">
+        <div className="font-bold">
+          <span
+            className={`${product?.productStatus === "Promotion" ? "line-through decoration-red-500 " : "text-teal-500"}`}
+          >
             {formatCurency(product.price)}
-          </span>
+          </span>{" "}
+          {product.promoPrice ? (
+            <span className="text-teal-500">
+              {" "}
+              / {formatCurency(product.promoPrice)}
+            </span>
+          ) : null}
         </div>
         <div className="flex flex-col gap-3 mt-5">
           <Link

@@ -36,9 +36,9 @@ export const bookSlice = createSlice({
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.bookLoading = "succeeded";
-        state.books = action.payload.books;
+        state.books = action.payload.products;
         state.totalPages = action.payload.totalPages;
-        state.totalBooks = action.payload.totalBooks;
+        state.totalBooks = action.payload.totalProducts;
       })
       .addCase(fetchBooks.rejected, (state, action) => {
         state.bookLoading = "failed";

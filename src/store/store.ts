@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import booksReducer from "./slices/book/bookSlices";
-import categoriesReducer from "./slices/category/categorySlice";
+import subCategoriesReducer from "./slices/subCategory/subCategorySlice";
 import cartReducer from "./slices/cart/cartSlice";
 import favoritesReducer from "./slices/favorites/favoriteSlice";
 import kidsBooksReducer from "./slices/kidsBook/kidsBookSlices";
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   books: booksReducer, // not persisted
   kidsBook: kidsBooksReducer,
   gamesAndGifts: gamesAndGiftsReducer,
-  categories: categoriesReducer, // not persisted
+  subCategories: subCategoriesReducer, // not persisted
   cart: cartReducer, // will be persisted via root config
   favorites: favoritesReducer, // will be persisted via root config
   stationery: stationeryReducer,

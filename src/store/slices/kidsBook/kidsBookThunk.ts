@@ -3,18 +3,25 @@ import axios from "axios";
 
 type FetchBooksParams = {
   page: number;
+  selectedSubCategory?: string;
+  productStatus?: string | undefined;
   title?: string;
 };
-
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const fetchKidsBooks = createAsyncThunk(
   "KidsBooks/fetchKidsBooks",
-  async ({ page, title }: FetchBooksParams, { rejectWithValue }) => {
+  async (
+    { page, selectedSubCategory, title, productStatus }: FetchBooksParams,
+    { rejectWithValue }
+  ) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/products/kids`, {
+      const res = await axios.get(`${BASE_URL}/api/products`, {
         params: {
           title,
+          category: "Enfants",
+          subCategory: selectedSubCategory,
+          productStatus: productStatus,
           page,
         },
       });

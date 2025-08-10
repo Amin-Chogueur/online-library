@@ -5,8 +5,9 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
 import Product from "../components/product/Product";
-import NoProductFound from "../components/product/NoProductFound";
 import { fetchStationeryProducts } from "../store/slices/stationery/stationeryThunk";
+import NoProductFound from "../components/ui/NoProductFound";
+import FilterByStatus from "../components/ui/FilterByStatus";
 
 export default function KidsBooks() {
   const ref = useRef(null);
@@ -18,10 +19,10 @@ export default function KidsBooks() {
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
-
+  const productStatus = searchParams.get("statut") || undefined;
   useEffect(() => {
-    dispatch(fetchStationeryProducts({ page }));
-  }, [dispatch, page]);
+    dispatch(fetchStationeryProducts({ page, productStatus }));
+  }, [dispatch, page, productStatus]);
 
   return (
     <div ref={ref}>
@@ -42,12 +43,13 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
+              <FilterByStatus />
               {stationeryProducts.length === 0 &&
                 stationeryLoading === "succeeded" && <NoProductFound />}
               {stationeryLoading === "pending" ? (
                 <Spinner />
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
                   {stationeryProducts.map((product, i) => (
                     <motion.div
                       key={product._id}

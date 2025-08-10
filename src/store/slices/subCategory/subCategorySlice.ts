@@ -1,23 +1,23 @@
-import type { CategoryType } from "../../../type/category";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategories } from "./categoryThunk";
+import { fetchCategories } from "./subCategoryThunk";
+import type { SubCategoryType } from "../../../type/subCategory";
 
 // Define a type for the slice state
 type InitialStateType = {
-  categories: CategoryType[];
+  subCategories: SubCategoryType[];
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: null | string;
 };
 
 // Define the initial state using that type
 const initialState: InitialStateType = {
-  categories: [],
+  subCategories: [],
   loading: "idle",
   error: "",
 };
 
-export const categorySlice = createSlice({
-  name: "Categories",
+export const subCategorySlice = createSlice({
+  name: "SubCategories",
 
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -30,7 +30,7 @@ export const categorySlice = createSlice({
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.loading = "succeeded";
-        state.categories = action.payload;
+        state.subCategories = action.payload.subCategories;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = "failed";
@@ -39,4 +39,4 @@ export const categorySlice = createSlice({
   },
 });
 
-export default categorySlice.reducer;
+export default subCategorySlice.reducer;

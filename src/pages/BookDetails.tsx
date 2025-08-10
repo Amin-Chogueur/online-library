@@ -21,7 +21,7 @@ export default function BookDetails() {
       </h1>
       {book && book.quantity === 0 && (
         <h2 className="text-center text-lg text-orange-500  md:w-[60%] mx-auto mb-10">
-          Ce livre est actuellement indisponible. Contactez-nous via le{" "}
+          Ce produit est actuellement indisponible. Contactez-nous via le{" "}
           <Link to={"/contact"} className="underline">
             formulaire de contact
           </Link>{" "}

@@ -6,7 +6,8 @@ import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
 import { fetchGamesAndGifts } from "../store/slices/gamesAndGifts/gamesAndGiftsThunk";
 import Product from "../components/product/Product";
-import NoProductFound from "../components/product/NoProductFound";
+import NoProductFound from "../components/ui/NoProductFound";
+import FilterByStatus from "../components/ui/FilterByStatus";
 
 export default function GamesAndGifts() {
   const ref = useRef(null);
@@ -19,10 +20,10 @@ export default function GamesAndGifts() {
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
-
+  const productStatus = searchParams.get("statut") || undefined;
   useEffect(() => {
-    dispatch(fetchGamesAndGifts({ page }));
-  }, [dispatch, page]);
+    dispatch(fetchGamesAndGifts({ page, productStatus }));
+  }, [dispatch, page, productStatus]);
 
   return (
     <div ref={ref}>
@@ -43,12 +44,14 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
+              <FilterByStatus />
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
+
               {gamesAndGiftsLoading === "pending" ? (
                 <Spinner />
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
                   {gamesAndGifts.map((book, i) => (
                     <motion.div
                       key={book._id}

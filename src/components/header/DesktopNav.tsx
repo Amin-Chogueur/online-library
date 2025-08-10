@@ -33,14 +33,14 @@ export default function DesktopNav() {
         </li>
         <li>
           <NavLink
-            to="/Enfance"
+            to="/Enfants"
             className={({ isActive }) =>
               ` px-2 py-1 rounded-lg text-center ${
                 isActive ? "bg-amber-600" : "bg-gray-900"
               }`
             }
           >
-            Enfance
+            Enfants
           </NavLink>
         </li>
         <li>

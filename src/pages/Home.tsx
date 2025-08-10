@@ -17,7 +17,7 @@ const categories = [
     description: "Des histoires amusantes et éducatives pour les plus jeunes.",
     image: "/enfant.jpg",
     color: "bg-gradient-to-br from-green-900 to-green-700",
-    link: "/Enfance",
+    link: "/Enfants",
   },
   {
     title: "Jeux et cadeaux",

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useMusic } from "../../context/MusicContext";
+import { useMusic } from "../../hooks/useMusic";
 
 // Updated HomeCard component
 type HomeCardProps = {

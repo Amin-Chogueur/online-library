@@ -15,7 +15,6 @@ export default function Cart() {
   const { cart, productsInCart, productsInCartLoading } = useAppSelector(
     (state) => state.cart
   );
-  console.log(productsInCart);
   const cartItems = productsInCart.map((product) => {
     const cartItem = cart.find((item) => item._id === product._id);
     return {
@@ -25,7 +24,10 @@ export default function Cart() {
   });
 
   const totalPrice = cartItems.reduce(
-    (acu, cur) => acu + (cur?.quantityInCart ?? 0) * (cur?.price ?? 0),
+    (acu, cur) =>
+      acu +
+      (cur?.quantityInCart ?? 0) *
+        (cur.promoPrice && cur.promoPrice > 0 ? cur?.promoPrice : cur.price),
     0
   );
 

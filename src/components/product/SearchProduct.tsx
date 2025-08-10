@@ -10,10 +10,10 @@ export default function SearchProduct() {
     e.preventDefault();
     if (search.trim() === "") return;
     const title = search.replace(/ /g, "_");
-    dispatch(fetchBooks({ page: 1, selectedCategory: " ", title }));
+    dispatch(fetchBooks({ page: 1, selectedSubCategory: " ", title }));
   }
   return (
-    <form onSubmit={handleSearch} className="relative w-[300px] mb-6 mx-auto">
+    <form onSubmit={handleSearch} className="relative w-[300px] mb-12 mx-auto">
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}

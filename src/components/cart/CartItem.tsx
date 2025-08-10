@@ -82,7 +82,11 @@ export default function CartItem({ item }: { item: ProductType }) {
       {/* Price and Delete Button */}
       <div className="ml-auto flex flex-col items-end">
         <p className="text-lg font-bold text-amber-400">
-          {formatCurency(item.price! * item.quantityInCart!)}
+          {formatCurency(
+            (item.promoPrice && item.promoPrice > 0
+              ? item.promoPrice
+              : item.price!) * item.quantityInCart!
+          )}
         </p>
         <button
           onClick={handleRemoveItemFromCart}

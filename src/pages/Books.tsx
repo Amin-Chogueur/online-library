@@ -5,10 +5,11 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
 import SearchBook from "../components/product/SearchProduct";
-import NoBooksFound from "../components/product/NoProductFound";
+
 import Filter from "../components/product/Filter";
 import { fetchBooks } from "../store/slices/book/bookThunk";
 import Product from "../components/product/Product";
+import NoProductFound from "../components/ui/NoProductFound";
 
 export default function Books() {
   const ref = useRef(null);
@@ -18,11 +19,12 @@ export default function Books() {
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
-  const selectedCategory = searchParams.get("category") || "All";
+  const selectedSubCategory = searchParams.get("Category") || "All";
+  const productStatus = searchParams.get("statut") || undefined;
 
   useEffect(() => {
-    dispatch(fetchBooks({ page, selectedCategory }));
-  }, [dispatch, page, selectedCategory]);
+    dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
+  }, [dispatch, page, selectedSubCategory, productStatus]);
 
   return (
     <div ref={ref}>
@@ -47,12 +49,12 @@ export default function Books() {
               <SearchBook />
 
               {books.length === 0 && bookLoading === "succeeded" && (
-                <NoBooksFound />
+                <NoProductFound />
               )}
               {bookLoading === "pending" ? (
                 <Spinner />
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {books.map((book, i) => (
                     <motion.div
                       key={book._id}

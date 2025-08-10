@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useRef, useState, type ReactNode } from "react";
 
 type MusicContextType = {
   handlePlayMusic: () => void;
@@ -24,7 +18,7 @@ export default function MusicContextProvider({
   };
   return (
     <MusicContext.Provider value={{ handlePlayMusic }}>
-      <div className="fixed top-[90px] left-[20px] z-50 flex  gap-2">
+      <div className="fixed top-[85px] left-[10px] z-50 flex  gap-2">
         <span
           className="cursor-pointer p-1"
           onClick={() => setShowAudioControllers((prev) => !prev)}
@@ -34,7 +28,7 @@ export default function MusicContextProvider({
             fill="currentColor"
             strokeWidth="0"
             viewBox="0 0 1024 1024"
-            className="bg-orange-600 rounded text-3xl"
+            className="bg-orange-600 rounded text-xl md:text-2xl"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
@@ -55,12 +49,4 @@ export default function MusicContextProvider({
       {children}
     </MusicContext.Provider>
   );
-}
-
-export function useMusic() {
-  const context = useContext(MusicContext);
-  if (!context) {
-    throw new Error("useMusic must be used within a MusicProvider");
-  }
-  return context;
 }
