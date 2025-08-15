@@ -32,8 +32,8 @@ export default function Product({ product, category }: ProductPropsType) {
     e.stopPropagation();
     dispatch(addToCart(product._id));
   }
+
   const link = `/${category}/${product.title.replace(/ /g, "_")}`;
-  console.log(product);
   return (
     <div
       key={product._id}
@@ -86,7 +86,11 @@ export default function Product({ product, category }: ProductPropsType) {
         {product.author && (
           <p className="text-sm text-gray-300 mb-1">par {product.author}</p>
         )}
-
+        {product.subCategory?.name && (
+          <p className="text-md text-gray-400 mb-3">
+            category : {product.subCategory?.name}
+          </p>
+        )}
         {product.numberOfPages && (
           <p className="text-xs text-gray-400 mb-3">
             {product.numberOfPages} pages

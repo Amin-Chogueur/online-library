@@ -7,7 +7,7 @@ import Spinner from "../components/ui/Spinner";
 import { fetchGamesAndGifts } from "../store/slices/gamesAndGifts/gamesAndGiftsThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
-import FilterByStatus from "../components/ui/FilterByStatus";
+import Filter from "../components/product/Filter";
 
 export default function GamesAndGifts() {
   const ref = useRef(null);
@@ -21,9 +21,11 @@ export default function GamesAndGifts() {
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
   const productStatus = searchParams.get("statut") || undefined;
+  const selectedSubCategory = searchParams.get("Category") || "All";
+
   useEffect(() => {
-    dispatch(fetchGamesAndGifts({ page, productStatus }));
-  }, [dispatch, page, productStatus]);
+    dispatch(fetchGamesAndGifts({ page, productStatus, selectedSubCategory }));
+  }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (
     <div ref={ref}>
@@ -44,7 +46,7 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
-              <FilterByStatus />
+              <Filter />
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
 

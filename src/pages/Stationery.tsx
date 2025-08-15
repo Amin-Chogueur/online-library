@@ -7,7 +7,7 @@ import Spinner from "../components/ui/Spinner";
 import Product from "../components/product/Product";
 import { fetchStationeryProducts } from "../store/slices/stationery/stationeryThunk";
 import NoProductFound from "../components/ui/NoProductFound";
-import FilterByStatus from "../components/ui/FilterByStatus";
+import Filter from "../components/product/Filter";
 
 export default function KidsBooks() {
   const ref = useRef(null);
@@ -20,9 +20,12 @@ export default function KidsBooks() {
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
   const productStatus = searchParams.get("statut") || undefined;
+  const selectedSubCategory = searchParams.get("Category") || "All";
   useEffect(() => {
-    dispatch(fetchStationeryProducts({ page, productStatus }));
-  }, [dispatch, page, productStatus]);
+    dispatch(
+      fetchStationeryProducts({ page, productStatus, selectedSubCategory })
+    );
+  }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (
     <div ref={ref}>
@@ -43,7 +46,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <FilterByStatus />
+              <Filter />
               {stationeryProducts.length === 0 &&
                 stationeryLoading === "succeeded" && <NoProductFound />}
               {stationeryLoading === "pending" ? (

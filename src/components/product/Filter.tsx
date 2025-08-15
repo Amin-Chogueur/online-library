@@ -1,4 +1,9 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import Spinner from "../ui/Spinner";
 import { useEffect } from "react";
@@ -8,28 +13,43 @@ import FilterByStatus from "../ui/FilterByStatus";
 
 export default function Filter() {
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const selectedSubCategory = searchParams.get("Category") || "All";
   const { subCategories, loading } = useAppSelector(
     (state) => state.subCategories
   );
+  console.log(subCategories, pathname);
   const navigateToPage = (selectedSubCategory: string) => {
     if (selectedSubCategory === "") {
       return;
     }
     const subCategory = selectedSubCategory.replace(/ /g, "_");
-    navigate(`/Nos_Livres?Category=${subCategory}&page=1`);
+    navigate(`${pathname}?Category=${subCategory}&page=1`);
   };
 
   function handleBackToAllBooks() {
     dispatch(fetchBooks({ page: 1, selectedSubCategory: "All" }));
-    navigate(`/Nos_Livres?Category=All&page=1`);
+    navigate(`${pathname}?Category=All&page=1`);
   }
 
   useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+    const currentCategory = getCategoryName();
+    function getCategoryName() {
+      switch (pathname) {
+        case "/Nos_Livres":
+          return "Romans";
+        case "/Enfants":
+          return "Enfants";
+        case "/Jeux-Cadeaux":
+          return "Jeux et Cadeaux";
+        case "/Papeterie":
+          return "Papeterie";
+      }
+    }
+    dispatch(fetchCategories(currentCategory as string));
+  }, [dispatch, pathname]);
 
   if (loading === "pending") {
     <Spinner />;
@@ -55,7 +75,7 @@ export default function Filter() {
         {subCategories.map((subCategory) => (
           <Link
             key={subCategory._id}
-            to={`/Nos_Livres?Category=${subCategory.name.replace(/ /g, "_")}&page=1`}
+            to={`${pathname}?Category=${subCategory.name.replace(/ /g, "_")}&page=1`}
             className={`cursor-pointer px-4 py-2 rounded-full border  text-sm transition-all
               hover:bg-amber-200 hover:text-amber-900
               ${

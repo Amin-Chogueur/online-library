@@ -7,7 +7,7 @@ import Spinner from "../components/ui/Spinner";
 import { fetchKidsBooks } from "../store/slices/kidsBook/kidsBookThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
-import FilterByStatus from "../components/ui/FilterByStatus";
+import Filter from "../components/product/Filter";
 
 export default function KidsBooks() {
   const ref = useRef(null);
@@ -19,12 +19,12 @@ export default function KidsBooks() {
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
-
+  const selectedSubCategory = searchParams.get("Category") || "All";
   const productStatus = searchParams.get("statut") || undefined;
 
   useEffect(() => {
-    dispatch(fetchKidsBooks({ page, productStatus }));
-  }, [dispatch, page, productStatus]);
+    dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
+  }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (
     <div ref={ref}>
@@ -57,7 +57,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <FilterByStatus />
+              <Filter />
               {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
                 <NoProductFound />
               )}

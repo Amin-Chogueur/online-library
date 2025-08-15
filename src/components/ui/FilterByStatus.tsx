@@ -8,20 +8,6 @@ export default function FilterByStatus() {
   const productStatus = searchParams.get("statut") || undefined;
   return (
     <div className=" flex justify-center items-center border-t border-t-gray-500 mt-3 pt-3 gap-4">
-      {pathname !== "/Nos_Livres" && (
-        <Link
-          to={`${pathname}?Category=${selectedSubCategory.replace(/ /g, "_")}&page=1`}
-          className={`cursor-pointer px-4 py-2 rounded-full border  text-sm transition-all
-              hover:bg-amber-200 hover:text-amber-900
-              ${
-                productStatus === undefined
-                  ? " text-white font-medium bg-amber-700 border-amber-800"
-                  : "bg-amber-100  dark:bg-gray-700 text-gray-200 border-gray-600"
-              }`}
-        >
-          Tous
-        </Link>
-      )}
       <Link
         to={`${pathname}?Category=${selectedSubCategory.replace(/ /g, "_")}&statut=Promotion&page=1`}
         className={`cursor-pointer px-4 py-2 rounded-full border  text-sm transition-all

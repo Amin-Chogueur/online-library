@@ -5,9 +5,13 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const fetchCategories = createAsyncThunk(
   "Categories/fetchCategory",
-  async (_, { rejectWithValue }) => {
+  async (category: string | null, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/categories`);
+      const res = await axios.get(`${BASE_URL}/api/categories`, {
+        params: {
+          category,
+        },
+      });
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
