@@ -15,7 +15,7 @@ export default function FilterByStatus() {
               ${
                 productStatus === "Promotion"
                   ? " text-white font-medium bg-amber-700 border-amber-800"
-                  : "bg-amber-100  dark:bg-gray-700 text-gray-200 border-gray-600"
+                  : "  bg-gray-700 text-gray-200 border-gray-600"
               }`}
       >
         Promotion
@@ -27,7 +27,7 @@ export default function FilterByStatus() {
               ${
                 productStatus === "Nouveau"
                   ? " text-white font-medium bg-amber-700 border-amber-800"
-                  : "bg-amber-100  dark:bg-gray-700 text-gray-200 border-gray-600"
+                  : " bg-gray-700 text-gray-200 border-gray-600"
               }`}
       >
         Nouveau

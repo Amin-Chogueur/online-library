@@ -53,7 +53,7 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-amber-600 mb-4">
-              Nos Catégories
+              Nos Produits
             </h2>
           </motion.div>
 
