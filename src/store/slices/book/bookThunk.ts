@@ -26,6 +26,7 @@ export const fetchBooks = createAsyncThunk(
           page,
         },
       });
+
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

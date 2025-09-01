@@ -7,7 +7,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import Spinner from "../ui/Spinner";
 import { useEffect } from "react";
-import { fetchBooks } from "../../store/slices/book/bookThunk";
 import { fetchCategories } from "../../store/slices/subCategory/subCategoryThunk";
 import FilterByStatus from "../ui/FilterByStatus";
 
@@ -20,7 +19,6 @@ export default function Filter() {
   const { subCategories, loading } = useAppSelector(
     (state) => state.subCategories
   );
-  console.log(subCategories, pathname);
   const navigateToPage = (selectedSubCategory: string) => {
     if (selectedSubCategory === "") {
       return;
@@ -30,7 +28,6 @@ export default function Filter() {
   };
 
   function handleBackToAllBooks() {
-    dispatch(fetchBooks({ page: 1, selectedSubCategory: "All" }));
     navigate(`${pathname}?Category=All&page=1`);
   }
 

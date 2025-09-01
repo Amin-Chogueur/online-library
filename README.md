@@ -1,12 +1,12 @@
-# 📚 Bookstore Client App
+# 📚Online library Client App
 
-A modern and responsive bookstore application built with **React**, **TypeScript**, and **Tailwind CSS**. This app allows users to browse a curated collection of books, filter by category, search by title, manage their favorites and cart, and place orders with cash-on-delivery. All data is powered by an API provided by the Bookstore Admin Dashboard.
+A modern and responsive Online library application built with **React**, **TypeScript**, and **Tailwind CSS**. This app allows users to browse a curated collection of books, filter by category, search by title, manage their favorites and cart, and place orders with cash-on-delivery. All data is powered by an API provided by the library Admin Panel.
 
 ---
 
 ## 🚀 Features
 
-- 🔍 **Browse & Search Books**  
+- 🔍 **Browse & Search Products**  
   Users can explore the entire collection with:
 
   - **Category filtering** (server-side)
@@ -18,9 +18,9 @@ A modern and responsive bookstore application built with **React**, **TypeScript
 
 - 🛒 **Cart Functionality**
 
-  - Add books to cart
+  - Add products to cart
   - Increase/decrease quantity
-  - Remove books
+  - Remove products
   - Submit orders with a form
 
 - 📦 **Order Placement & Success Page**
@@ -29,14 +29,14 @@ A modern and responsive bookstore application built with **React**, **TypeScript
   - Order is saved to the admin database
   - On success, the app displays a detailed confirmation page (fetched from admin API)
 
-- 📄 **Book Details Page**  
-  Dynamic page showing full details of a selected book.
+- 📄 **Product Details Page**  
+  Dynamic page showing full details of a selected product.
 
 - ✉️ **Contact Page**  
   Users can send messages to the admin's email using the Resend API.
 
 - 👨‍💼 **About Page**  
-  Learn more about the bookstore.
+  Learn more about the Online library.
 
 - ✅ **Form Validation**
 

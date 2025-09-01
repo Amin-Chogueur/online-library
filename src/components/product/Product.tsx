@@ -51,13 +51,11 @@ export default function Product({ product, category }: ProductPropsType) {
         </span>
       )}
 
-      <div className="h-64 overflow-hidden">
+      <div className="h-64 overflow-hidden p-2">
         <img
-          width={150}
-          height={300}
           src={product.image}
           alt={product.title}
-          className="mx-auto h-full  hover:scale-105 transition-transform duration-300"
+          className="mx-auto h-full w-auto  hover:scale-105 transition-transform duration-300"
         />
       </div>
 
