@@ -42,10 +42,10 @@ export default function About() {
             {" "}
             <div className="mb-8">
               <h3 className="text-amber-500 text-2xl md:text-3xl font-semibold mb-4">
-                Bienvenue chez Ghizlene BookShop!
+                Bienvenue chez Online library!
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Chez Ghizlene BookShop, nous croyons que chaque objet – qu’il
+                Chez Online library, nous croyons que chaque objet – qu’il
                 s’agisse d’un livre, d’un jeu, d’un article de papeterie ou d’un
                 petit cadeau – peut ouvrir la porte à une aventure, à
                 l’imagination et à la découverte. Notre collection soigneusement
@@ -87,9 +87,9 @@ export default function About() {
                     <span className="font-bold text-amber-500">
                       Un esprit communautaire:
                     </span>{" "}
-                    Ghizlene BookShop, c’est plus qu’une boutique : c’est un
-                    lieu de partage. Participez à nos événements, ateliers
-                    créatifs, séances de lecture et découvrez une communauté de
+                    Online library, c’est plus qu’une boutique : c’est un lieu
+                    de partage. Participez à nos événements, ateliers créatifs,
+                    séances de lecture et découvrez une communauté de
                     passionnés.
                   </p>
                 </li>
@@ -111,7 +111,7 @@ export default function About() {
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mt-4">
                 Merci d'avoir choisi{" "}
-                <span className="font-bold">Ghizlene BookShop</span> . Bonne
+                <span className="font-bold">Online library</span> . Bonne
                 lecture !
               </p>
             </div>

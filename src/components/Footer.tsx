@@ -96,16 +96,16 @@ function Footer() {
             <li className="flex items-center gap-2 justify-center md:justify-start">
               <FaEnvelope className="w-4 h-4" />
               <a href="mailto:ghizlenebambrik@gmail.com">
-                ghizlenebambrik@gmail.com
+                chogueuramine@gmail.com
               </a>
             </li>
             <li className="flex items-center gap-2 justify-center md:justify-start">
               <FaPhone className="w-4 h-4" />
-              <a href="tel:+213 540 08 73 47">+213 540 08 73 47</a>
+              <a href="tel:+213 671 26 53 77">+213 671 26 53 77</a>
             </li>
             <li className="flex items-center gap-2 justify-center md:justify-start">
               <FaMapMarkerAlt className="w-4 h-4" />
-              <span>Oran, Algérie</span>
+              <span>Tlemcen, Algérie</span>
             </li>
           </ul>
         </div>
@@ -152,7 +152,7 @@ function Footer() {
         <p className="text-lg text-center">
           Copyright © 2025{" "}
           <Link to={"/"} className="text-amber-600 text-2xl">
-            Ghizo BookShop
+            Online library
           </Link>
           . Tous droits réservés.
         </p>

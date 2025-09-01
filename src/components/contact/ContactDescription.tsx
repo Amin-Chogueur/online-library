@@ -14,8 +14,8 @@ export default function ContactDescription({
       <div className="  text-xl ">
         <p>
           Merci de visiter{" "}
-          <span className="text-amber-500 font-medium">Ghizlene BookShop</span>{" "}
-          ! Nous sommes là pour vous aider à découvrir de nouvelles lectures, à
+          <span className="text-amber-500 font-medium">Online library</span> !
+          Nous sommes là pour vous aider à découvrir de nouvelles lectures, à
           choisir des articles de papeterie inspirants, à trouver des jeux
           amusants ou des cadeaux parfaits pour vos proches. N’hésitez pas à
           nous poser vos questions ou à explorer ce qui rend notre boutique si
