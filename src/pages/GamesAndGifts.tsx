@@ -46,7 +46,7 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
-              <Filter />
+              <Filter page="Jeux et Cadeaux" />
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
 

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { fetchCategories } from "../../store/slices/subCategory/subCategoryThunk";
 import FilterByStatus from "../ui/FilterByStatus";
 
-export default function Filter() {
+export default function Filter({ page }: { page: string }) {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -32,21 +32,8 @@ export default function Filter() {
   }
 
   useEffect(() => {
-    const currentCategory = getCategoryName();
-    function getCategoryName() {
-      switch (pathname) {
-        case "/Nos_Livres":
-          return "Romans";
-        case "/Enfants":
-          return "Enfants";
-        case "/Jeux-Cadeaux":
-          return "Jeux et Cadeaux";
-        case "/Papeterie":
-          return "Papeterie";
-      }
-    }
-    dispatch(fetchCategories(currentCategory as string));
-  }, [dispatch, pathname]);
+    dispatch(fetchCategories(page as string));
+  }, [dispatch, page]);
 
   if (loading === "pending") {
     <Spinner />;

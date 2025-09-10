@@ -46,7 +46,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter />
+              <Filter page="Papeterie" />
               {stationeryProducts.length === 0 &&
                 stationeryLoading === "succeeded" && <NoProductFound />}
               {stationeryLoading === "pending" ? (

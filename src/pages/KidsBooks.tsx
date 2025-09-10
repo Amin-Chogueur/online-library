@@ -57,7 +57,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter />
+              <Filter page="Enfants" />
               {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
                 <NoProductFound />
               )}

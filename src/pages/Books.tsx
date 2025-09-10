@@ -45,7 +45,7 @@ export default function Books() {
             </div>
           ) : (
             <div>
-              <Filter />
+              <Filter page="Romans" />
               <SearchBook />
 
               {books.length === 0 && bookLoading === "succeeded" && (
