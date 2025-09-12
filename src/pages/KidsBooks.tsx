@@ -8,6 +8,7 @@ import { fetchKidsBooks } from "../store/slices/kidsBook/kidsBookThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
 import Filter from "../components/product/Filter";
+import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
 
 export default function KidsBooks() {
   const ref = useRef(null);
@@ -21,6 +22,10 @@ export default function KidsBooks() {
   const page = parseInt(searchParams.get("page") || "1");
   const selectedSubCategory = searchParams.get("Category") || "All";
   const productStatus = searchParams.get("statut") || undefined;
+
+  useEffect(() => {
+    dispatch(fetchCategories("Enfants"));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
@@ -57,7 +62,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter page="Enfants" />
+              <Filter />
               {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
                 <NoProductFound />
               )}

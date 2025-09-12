@@ -8,6 +8,7 @@ import { fetchGamesAndGifts } from "../store/slices/gamesAndGifts/gamesAndGiftsT
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
 import Filter from "../components/product/Filter";
+import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
 
 export default function GamesAndGifts() {
   const ref = useRef(null);
@@ -22,6 +23,9 @@ export default function GamesAndGifts() {
   const page = parseInt(searchParams.get("page") || "1");
   const productStatus = searchParams.get("statut") || undefined;
   const selectedSubCategory = searchParams.get("Category") || "All";
+  useEffect(() => {
+    dispatch(fetchCategories("Jeux et Cadeaux"));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchGamesAndGifts({ page, productStatus, selectedSubCategory }));
@@ -46,7 +50,7 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
-              <Filter page="Jeux et Cadeaux" />
+              <Filter />
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
 

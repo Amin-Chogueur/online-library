@@ -8,6 +8,7 @@ import Product from "../components/product/Product";
 import { fetchStationeryProducts } from "../store/slices/stationery/stationeryThunk";
 import NoProductFound from "../components/ui/NoProductFound";
 import Filter from "../components/product/Filter";
+import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
 
 export default function KidsBooks() {
   const ref = useRef(null);
@@ -21,6 +22,11 @@ export default function KidsBooks() {
   const page = parseInt(searchParams.get("page") || "1");
   const productStatus = searchParams.get("statut") || undefined;
   const selectedSubCategory = searchParams.get("Category") || "All";
+
+  useEffect(() => {
+    dispatch(fetchCategories("Papeterie"));
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(
       fetchStationeryProducts({ page, productStatus, selectedSubCategory })
@@ -46,7 +52,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter page="Papeterie" />
+              <Filter />
               {stationeryProducts.length === 0 &&
                 stationeryLoading === "succeeded" && <NoProductFound />}
               {stationeryLoading === "pending" ? (

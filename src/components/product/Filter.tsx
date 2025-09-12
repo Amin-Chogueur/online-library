@@ -4,14 +4,12 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import Spinner from "../ui/Spinner";
-import { useEffect } from "react";
-import { fetchCategories } from "../../store/slices/subCategory/subCategoryThunk";
+
 import FilterByStatus from "../ui/FilterByStatus";
 
-export default function Filter({ page }: { page: string }) {
-  const dispatch = useAppDispatch();
+export default function Filter() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -30,10 +28,6 @@ export default function Filter({ page }: { page: string }) {
   function handleBackToAllBooks() {
     navigate(`${pathname}?Category=All&page=1`);
   }
-
-  useEffect(() => {
-    dispatch(fetchCategories(page as string));
-  }, [dispatch, page]);
 
   if (loading === "pending") {
     <Spinner />;

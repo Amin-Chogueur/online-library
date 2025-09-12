@@ -10,6 +10,7 @@ import Filter from "../components/product/Filter";
 import { fetchBooks } from "../store/slices/book/bookThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
+import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
 
 export default function Books() {
   const ref = useRef(null);
@@ -22,6 +23,12 @@ export default function Books() {
   const selectedSubCategory = searchParams.get("Category") || "All";
   const productStatus = searchParams.get("statut") || undefined;
 
+  // Fetch categories once on mount
+  useEffect(() => {
+    dispatch(fetchCategories("Romans"));
+  }, [dispatch]);
+
+  // Fetch books whenever page/filter/status changes
   useEffect(() => {
     dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
   }, [dispatch, page, selectedSubCategory, productStatus]);
@@ -45,7 +52,7 @@ export default function Books() {
             </div>
           ) : (
             <div>
-              <Filter page="Romans" />
+              <Filter />
               <SearchBook />
 
               {books.length === 0 && bookLoading === "succeeded" && (
