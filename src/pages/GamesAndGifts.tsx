@@ -16,7 +16,6 @@ export default function GamesAndGifts() {
   const { gamesAndGifts, gamesAndGiftsLoading, error } = useAppSelector(
     (state) => state.gamesAndGifts
   );
-  console.log(gamesAndGifts);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
