@@ -44,7 +44,7 @@ export const fetchProductsInCart = createAsyncThunk(
       const res = await axios.get(`${BASE_URL}/api/cart`, {
         params: { ids },
       });
-
+      console.log(res.data);
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

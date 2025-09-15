@@ -14,10 +14,6 @@ import Stationery from "./pages/Stationery";
 import React, { Suspense } from "react";
 import Spinner from "./components/ui/Spinner";
 
-//loaders
-
-import { booksLoader } from "./loaders/booksLoader";
-
 // Lazy imports
 const BookDetails = React.lazy(() => import("./pages/BookDetails"));
 const KidsBookDetails = React.lazy(() => import("./pages/KidsBookDetails"));
@@ -44,7 +40,6 @@ const router = createBrowserRouter([
       {
         path: "Nos_Livres",
         element: <Books />,
-        loader: booksLoader,
       },
       { path: "Nos_Livres/:title", element: withSuspense(BookDetails) },
       { path: "Enfants", element: <KidsBooks /> },

@@ -1,38 +1,37 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Pagination from "../components/Pagination";
 import { motion, useInView } from "framer-motion";
-import { useAppSelector } from "../hooks/reduxHooks";
-// import { useSearchParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import Spinner from "../components/ui/Spinner";
 import SearchBook from "../components/product/SearchProduct";
 
 import Filter from "../components/product/Filter";
-// import { fetchBooks } from "../store/slices/book/bookThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
-import { useNavigation } from "react-router-dom";
-// import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
+import { useNavigation, useSearchParams } from "react-router-dom";
+import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
+import { fetchBooks } from "../store/slices/book/bookThunk";
 
 export default function Books() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
   const { books, bookLoading, error } = useAppSelector((state) => state.books);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // const [searchParams] = useSearchParams();
-  // const page = parseInt(searchParams.get("page") || "1");
-  // const selectedSubCategory = searchParams.get("Category") || "All";
-  // const productStatus = searchParams.get("statut") || undefined;
+  const [searchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1");
+  const selectedSubCategory = searchParams.get("Category") || "All";
+  const productStatus = searchParams.get("statut") || undefined;
 
-  // // Fetch categories once on mount
-  // useEffect(() => {
-  //   dispatch(fetchCategories("Romans"));
-  // }, [dispatch]);
+  // Fetch categories once on mount
+  useEffect(() => {
+    dispatch(fetchCategories("Romans"));
+  }, [dispatch]);
 
-  // // Fetch books whenever page/filter/status changes
-  // useEffect(() => {
-  //   dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
-  // }, [dispatch, page, selectedSubCategory, productStatus]);
+  // Fetch books whenever page/filter/status changes
+  useEffect(() => {
+    dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
+  }, [dispatch, page, selectedSubCategory, productStatus]);
   const navigation = useNavigation();
 
   if (navigation.state === "loading") {
