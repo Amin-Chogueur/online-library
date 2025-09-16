@@ -25,13 +25,13 @@ export default function KidsBooks() {
   const selectedSubCategory = searchParams.get("Category") || "All";
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(fetchCategories("Papeterie"));
-      dispatch(
-        fetchStationeryProducts({ page, productStatus, selectedSubCategory })
-      );
-    }
-    fetchData();
+    dispatch(fetchCategories("Papeterie"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      fetchStationeryProducts({ page, productStatus, selectedSubCategory })
+    );
   }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (

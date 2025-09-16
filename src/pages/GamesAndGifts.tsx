@@ -25,13 +25,11 @@ export default function GamesAndGifts() {
   const selectedSubCategory = searchParams.get("Category") || "All";
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(fetchCategories("Jeux et Cadeaux"));
-      dispatch(
-        fetchGamesAndGifts({ page, productStatus, selectedSubCategory })
-      );
-    }
-    fetchData();
+    dispatch(fetchCategories("Jeux et Cadeaux"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchGamesAndGifts({ page, productStatus, selectedSubCategory }));
   }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (

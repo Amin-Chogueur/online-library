@@ -25,12 +25,11 @@ export default function Books() {
   const productStatus = searchParams.get("statut") || undefined;
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(fetchCategories("Romans"));
-      dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
-    }
+    dispatch(fetchCategories("Romans"));
+  }, [dispatch]);
 
-    fetchData();
+  useEffect(() => {
+    dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
   }, [dispatch, page, selectedSubCategory, productStatus]);
 
   return (
