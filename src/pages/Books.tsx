@@ -52,7 +52,7 @@ export default function Books() {
             </div>
           ) : (
             <div>
-              {loading === "pending" ? <Filter /> : null}
+              {loading === "pending" ? <Spinner /> : <Filter />}
               <SearchBook />
 
               {books.length === 0 && bookLoading === "succeeded" && (

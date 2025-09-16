@@ -63,7 +63,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              {loading === "pending" ? <Filter /> : null}
+              {loading === "pending" ? <Spinner /> : <Filter />}
               {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
                 <NoProductFound />
               )}

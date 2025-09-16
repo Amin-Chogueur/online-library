@@ -53,7 +53,7 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
-              {loading === "pending" ? <Filter /> : null}
+              {loading === "pending" ? <Spinner /> : <Filter />}
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
 
