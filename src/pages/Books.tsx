@@ -16,6 +16,7 @@ export default function Books() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
   const { books, bookLoading, error } = useAppSelector((state) => state.books);
+  const { loading } = useAppSelector((state) => state.subCategories);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -51,7 +52,7 @@ export default function Books() {
             </div>
           ) : (
             <div>
-              <Filter />
+              {loading === "pending" ? <Filter /> : null}
               <SearchBook />
 
               {books.length === 0 && bookLoading === "succeeded" && (

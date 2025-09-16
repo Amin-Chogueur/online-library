@@ -16,6 +16,7 @@ export default function KidsBooks() {
   const { KidsBooks, kidsBookLoading, error } = useAppSelector(
     (state) => state.kidsBook
   );
+  const { loading } = useAppSelector((state) => state.subCategories);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -62,7 +63,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter />
+              {loading === "pending" ? <Filter /> : null}
               {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
                 <NoProductFound />
               )}

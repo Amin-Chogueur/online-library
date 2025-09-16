@@ -5,7 +5,6 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
-import Spinner from "../ui/Spinner";
 
 import FilterByStatus from "../ui/FilterByStatus";
 
@@ -14,9 +13,7 @@ export default function Filter() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const selectedSubCategory = searchParams.get("Category") || "All";
-  const { subCategories, loading } = useAppSelector(
-    (state) => state.subCategories
-  );
+  const { subCategories } = useAppSelector((state) => state.subCategories);
   const navigateToPage = (selectedSubCategory: string) => {
     if (selectedSubCategory === "") {
       return;
@@ -27,11 +24,6 @@ export default function Filter() {
 
   function handleBackToAllBooks() {
     navigate(`${pathname}?Category=All&page=1`);
-  }
-
-  if (loading === "pending") {
-    <Spinner />;
-    return;
   }
 
   return (

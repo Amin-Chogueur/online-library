@@ -16,6 +16,7 @@ export default function KidsBooks() {
   const { stationeryProducts, stationeryLoading, error } = useAppSelector(
     (state) => state.stationery
   );
+  const { loading } = useAppSelector((state) => state.subCategories);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -52,7 +53,7 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              <Filter />
+              {loading === "pending" ? <Filter /> : null}
               {stationeryProducts.length === 0 &&
                 stationeryLoading === "succeeded" && <NoProductFound />}
               {stationeryLoading === "pending" ? (

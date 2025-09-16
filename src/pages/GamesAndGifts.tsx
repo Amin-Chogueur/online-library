@@ -16,6 +16,7 @@ export default function GamesAndGifts() {
   const { gamesAndGifts, gamesAndGiftsLoading, error } = useAppSelector(
     (state) => state.gamesAndGifts
   );
+  const { loading } = useAppSelector((state) => state.subCategories);
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -52,7 +53,7 @@ export default function GamesAndGifts() {
             </div>
           ) : (
             <div>
-              <Filter />
+              {loading === "pending" ? <Filter /> : null}
               {gamesAndGifts?.length === 0 &&
                 gamesAndGiftsLoading === "succeeded" && <NoProductFound />}
 
