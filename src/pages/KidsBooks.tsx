@@ -24,11 +24,11 @@ export default function KidsBooks() {
   const productStatus = searchParams.get("statut") || undefined;
 
   useEffect(() => {
-    dispatch(fetchCategories("Enfants"));
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
+    async function fetchData() {
+      await dispatch(fetchCategories("Enfants"));
+      dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
+    }
+    fetchData();
   }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (

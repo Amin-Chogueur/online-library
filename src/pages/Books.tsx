@@ -8,7 +8,7 @@ import SearchBook from "../components/product/SearchProduct";
 import Filter from "../components/product/Filter";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
-import { useNavigation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
 import { fetchBooks } from "../store/slices/book/bookThunk";
 
@@ -23,20 +23,15 @@ export default function Books() {
   const selectedSubCategory = searchParams.get("Category") || "All";
   const productStatus = searchParams.get("statut") || undefined;
 
-  // Fetch categories once on mount
   useEffect(() => {
-    dispatch(fetchCategories("Romans"));
-  }, [dispatch]);
+    async function fetchData() {
+      await dispatch(fetchCategories("Romans"));
+      dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
+    }
 
-  // Fetch books whenever page/filter/status changes
-  useEffect(() => {
-    dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
+    fetchData();
   }, [dispatch, page, selectedSubCategory, productStatus]);
-  const navigation = useNavigation();
 
-  if (navigation.state === "loading") {
-    return <Spinner />;
-  }
   return (
     <div ref={ref}>
       <div className="min-h-screen px-2 py-4 sm:px-6">

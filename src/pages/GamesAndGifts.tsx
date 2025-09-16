@@ -22,12 +22,15 @@ export default function GamesAndGifts() {
   const page = parseInt(searchParams.get("page") || "1");
   const productStatus = searchParams.get("statut") || undefined;
   const selectedSubCategory = searchParams.get("Category") || "All";
-  useEffect(() => {
-    dispatch(fetchCategories("Jeux et Cadeaux"));
-  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchGamesAndGifts({ page, productStatus, selectedSubCategory }));
+    async function fetchData() {
+      await dispatch(fetchCategories("Jeux et Cadeaux"));
+      dispatch(
+        fetchGamesAndGifts({ page, productStatus, selectedSubCategory })
+      );
+    }
+    fetchData();
   }, [dispatch, page, productStatus, selectedSubCategory]);
 
   return (
