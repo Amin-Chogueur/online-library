@@ -16,7 +16,9 @@ export default function GamesAndGifts() {
   const { gamesAndGifts, gamesAndGiftsLoading, error } = useAppSelector(
     (state) => state.gamesAndGifts
   );
-  const { loading } = useAppSelector((state) => state.subCategories);
+  const { loading, subCategories } = useAppSelector(
+    (state) => state.subCategories
+  );
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -29,8 +31,12 @@ export default function GamesAndGifts() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchGamesAndGifts({ page, productStatus, selectedSubCategory }));
-  }, [dispatch, page, productStatus, selectedSubCategory]);
+    if (subCategories) {
+      dispatch(
+        fetchGamesAndGifts({ page, productStatus, selectedSubCategory })
+      );
+    }
+  }, [dispatch, page, productStatus, selectedSubCategory, subCategories]);
 
   return (
     <div ref={ref}>

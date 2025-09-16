@@ -16,7 +16,9 @@ export default function KidsBooks() {
   const { KidsBooks, kidsBookLoading, error } = useAppSelector(
     (state) => state.kidsBook
   );
-  const { loading } = useAppSelector((state) => state.subCategories);
+  const { loading, subCategories } = useAppSelector(
+    (state) => state.subCategories
+  );
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -29,8 +31,10 @@ export default function KidsBooks() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
-  }, [dispatch, page, productStatus, selectedSubCategory]);
+    if (subCategories) {
+      dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
+    }
+  }, [dispatch, page, productStatus, selectedSubCategory, subCategories]);
 
   return (
     <div ref={ref}>

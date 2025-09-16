@@ -16,7 +16,9 @@ export default function Books() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
   const { books, bookLoading, error } = useAppSelector((state) => state.books);
-  const { loading } = useAppSelector((state) => state.subCategories);
+  const { loading, subCategories } = useAppSelector(
+    (state) => state.subCategories
+  );
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
@@ -29,8 +31,10 @@ export default function Books() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
-  }, [dispatch, page, selectedSubCategory, productStatus]);
+    if (subCategories) {
+      dispatch(fetchBooks({ page, selectedSubCategory, productStatus }));
+    }
+  }, [dispatch, page, selectedSubCategory, productStatus, subCategories]);
 
   return (
     <div ref={ref}>
