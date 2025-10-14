@@ -1,24 +1,7 @@
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useAppSelector } from "../hooks/reduxHooks";
 
-type PaginationPropsType = {
-  component: "Nos livres" | "Enfance" | "Jeux-Cadeaux" | "Papeterie";
-};
-
-export default function Pagination({ component }: PaginationPropsType) {
-  const totalPages = useAppSelector((state) => {
-    switch (component) {
-      case "Nos livres":
-        return state.books.totalPages;
-      case "Enfance":
-        return state.kidsBook.totalPages;
-      case "Jeux-Cadeaux":
-        return state.gamesAndGifts.totalPages;
-      case "Papeterie":
-        return state.stationery.totalPages;
-    }
-  });
+export default function Pagination({ totalPages }: { totalPages: number }) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();

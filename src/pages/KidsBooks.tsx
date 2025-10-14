@@ -1,40 +1,39 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Pagination from "../components/Pagination";
 import { motion, useInView } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../components/ui/Spinner";
-import { fetchKidsBooks } from "../store/slices/kidsBook/kidsBookThunk";
 import Product from "../components/product/Product";
 import NoProductFound from "../components/ui/NoProductFound";
 import Filter from "../components/product/Filter";
-import { fetchCategories } from "../store/slices/subCategory/subCategoryThunk";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCategories } from "../queries/subCategories";
+import { fetchKidsBooks } from "../queries/kids";
+import type { ProductType } from "../type/product";
 
 export default function KidsBooks() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
-  const { KidsBooks, kidsBookLoading, error } = useAppSelector(
-    (state) => state.kidsBook
-  );
-  const { loading, subCategories } = useAppSelector(
-    (state) => state.subCategories
-  );
-  const dispatch = useAppDispatch();
-
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
   const selectedSubCategory = searchParams.get("Category") || "All";
   const productStatus = searchParams.get("statut") || undefined;
 
-  useEffect(() => {
-    dispatch(fetchCategories("Enfants"));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (subCategories) {
-      dispatch(fetchKidsBooks({ page, productStatus, selectedSubCategory }));
-    }
-  }, [dispatch, page, productStatus, selectedSubCategory, subCategories]);
+  const { data, isLoading } = useQuery({
+    queryKey: ["Enfants"],
+    queryFn: () => fetchCategories("Enfants"),
+    staleTime: 1000 * 60 * 10,
+  });
+  const {
+    data: kidsBooksData,
+    isLoading: kidsBookLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["kids", page, selectedSubCategory, productStatus],
+    queryFn: () => fetchKidsBooks({ page, selectedSubCategory, productStatus }),
+    staleTime: 1000 * 60 * 10,
+  });
 
   return (
     <div ref={ref}>
@@ -55,9 +54,9 @@ export default function KidsBooks() {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          {error ? (
+          {isError ? (
             <div className="text-red-500 text-center space-y-4">
-              <p className="text-2xl">{error}</p>
+              <p className="text-2xl">{error.message}</p>
               <button
                 onClick={() => window.location.reload()}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
@@ -67,28 +66,31 @@ export default function KidsBooks() {
             </div>
           ) : (
             <div>
-              {loading === "pending" ? <Spinner /> : <Filter />}
-              {KidsBooks.length === 0 && kidsBookLoading === "succeeded" && (
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <Filter subCategories={data.subCategories} />
+              )}
+              {kidsBooksData?.products === 0 && !kidsBookLoading && (
                 <NoProductFound />
               )}
 
-              {kidsBookLoading === "pending" ? (
-                <Spinner />
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
-                  {KidsBooks.map((book, i) => (
-                    <motion.div
-                      key={book._id}
-                      initial={{ opacity: 0, y: 20 }} // Initial state
-                      animate={isInView ? { opacity: 1, y: 0 } : {}} // Animate only if section is in view
-                      transition={{ duration: 1, delay: i * 0.5 }} // Delay for staggered effect
-                    >
-                      <Product product={book} category="Enfants" />
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
+                {kidsBooksData?.products.map((book: ProductType, i: number) => (
+                  <motion.div
+                    key={book._id}
+                    initial={{ opacity: 0, y: 20 }} // Initial state
+                    animate={isInView ? { opacity: 1, y: 0 } : {}} // Animate only if section is in view
+                    transition={{ duration: 1, delay: i * 0.5 }} // Delay for staggered effect
+                  >
+                    <Product product={book} category="Enfants" />
+                  </motion.div>
+                ))}
+              </div>
+
+              {kidsBooksData?.products.length > 0 && (
+                <Pagination totalPages={kidsBooksData.totalPages} />
               )}
-              {KidsBooks.length > 0 && <Pagination component="Enfance" />}
             </div>
           )}
         </div>

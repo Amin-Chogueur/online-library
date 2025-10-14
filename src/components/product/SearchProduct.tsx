@@ -1,16 +1,23 @@
 import { useState, type FormEvent } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { fetchBooks } from "../../store/slices/book/bookThunk";
 
-export default function SearchProduct() {
-  const dispatch = useAppDispatch();
+export default function SearchProduct({
+  setTitle,
+}: {
+  setTitle: (value: string) => void;
+}) {
   const [search, setSearch] = useState("");
+
+  // Create a query but disable auto-fetch
+
   function handleSearch(e: FormEvent) {
     e.preventDefault();
-    if (search.trim() === "") return;
-    const title = search.replace(/ /g, "_");
-    dispatch(fetchBooks({ page: 1, selectedSubCategory: "", title }));
+    const title = search.trim();
+    if (title === "") {
+      setTitle("");
+      return;
+    }
+    setTitle(title);
   }
   return (
     <form onSubmit={handleSearch} className="relative w-[300px] mb-12 mx-auto">

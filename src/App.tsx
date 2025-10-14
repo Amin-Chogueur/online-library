@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MainLayout from "./layouts/MainLayout";
 import ErrorPage from "./pages/ErrorPage";
 import Books from "./pages/Books";
@@ -12,9 +14,7 @@ import Home from "./pages/Home";
 import GamesAndGifts from "./pages/GamesAndGifts";
 import Stationery from "./pages/Stationery";
 import React, { Suspense } from "react";
-import Spinner from "./components/ui/Spinner";
-
-// Lazy imports
+import Spinner from "./components/ui/Spinner"; // Lazy imports
 const BookDetails = React.lazy(() => import("./pages/BookDetails"));
 const KidsBookDetails = React.lazy(() => import("./pages/KidsBookDetails"));
 const GamesAndGiftsDetails = React.lazy(
@@ -29,7 +29,7 @@ const withSuspense = (Component: React.ComponentType) => (
     <Component />
   </Suspense>
 );
-
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,5 +63,10 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }

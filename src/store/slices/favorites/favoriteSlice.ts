@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { ProductType } from "../../../type/product";
-import { fetchFavoriteProduct } from "./favoriteThunk";
 
 type InitialStateType = {
   favorites: ProductType[];
@@ -28,21 +27,6 @@ const favoriteSlice = createSlice({
         (product) => product._id !== action.payload
       );
     },
-  },
-  extraReducers: (builder) => {
-    builder
-
-      .addCase(fetchFavoriteProduct.pending, (state) => {
-        state.productLoading = "pending";
-      })
-      .addCase(fetchFavoriteProduct.fulfilled, (state, action) => {
-        state.productLoading = "succeeded";
-        state.product = action.payload.product;
-      })
-      .addCase(fetchFavoriteProduct.rejected, (state, action) => {
-        state.productLoading = "failed";
-        state.error = action.payload as string;
-      });
   },
 });
 

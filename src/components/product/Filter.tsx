@@ -4,16 +4,19 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
 
 import FilterByStatus from "../ui/FilterByStatus";
+import type { SubCategoryType } from "../../type/subCategory";
 
-export default function Filter() {
+export default function Filter({
+  subCategories,
+}: {
+  subCategories: SubCategoryType[];
+}) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const selectedSubCategory = searchParams.get("Category") || "All";
-  const { subCategories } = useAppSelector((state) => state.subCategories);
   const navigateToPage = (selectedSubCategory: string) => {
     if (selectedSubCategory === "") {
       return;
