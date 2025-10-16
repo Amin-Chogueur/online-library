@@ -26,7 +26,7 @@ export default function SearchProduct({
         onChange={(e) => setSearch(e.target.value)}
         type="text"
         placeholder="	Taper le titre du livre..."
-        className="w-full p-3 rounded-lg bg-zinc-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="w-full p-2 px-0 rounded-lg bg-zinc-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
       />
       <button className="absolute top-1/2 right-0 -translate-y-1/2 text-zinc-100 cursor-pointer bg-amber-600 h-full w-[25px] flex justify-center items-center rounded-br-lg rounded-tr-lg">
         <FiSearch />

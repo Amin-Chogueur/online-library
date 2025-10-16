@@ -46,7 +46,7 @@ export default function Home() {
       <div className=" h-screen"></div>
       {/* Categories Section */}
       <section className="pt-4 pb-12 px-4 sm:px-6 ">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto ">
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}

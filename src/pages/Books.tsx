@@ -62,9 +62,12 @@ export default function Books() {
               ) : (
                 <Filter subCategories={data.subCategories} />
               )}
+
               <SearchBook setTitle={setTitle} />
 
-              {!booksData?.products && !bookLoading && <NoProductFound />}
+              {booksData?.products.length === 0 && !bookLoading && (
+                <NoProductFound />
+              )}
 
               <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {booksData?.products.map((book: ProductType, i: number) => (
@@ -79,7 +82,7 @@ export default function Books() {
                 ))}
               </div>
 
-              {booksData?.products && (
+              {booksData?.products.length > 0 && (
                 <Pagination totalPages={booksData.totalPages} />
               )}
             </div>

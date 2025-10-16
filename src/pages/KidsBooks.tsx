@@ -71,7 +71,7 @@ export default function KidsBooks() {
               ) : (
                 <Filter subCategories={data.subCategories} />
               )}
-              {kidsBooksData?.products === 0 && !kidsBookLoading && (
+              {kidsBooksData?.products.length === 0 && !kidsBookLoading && (
                 <NoProductFound />
               )}
 
