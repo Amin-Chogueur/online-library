@@ -18,11 +18,12 @@ import Spinner from "./components/ui/Spinner"; // Lazy imports
 const BookDetails = React.lazy(() => import("./pages/BookDetails"));
 const KidsBookDetails = React.lazy(() => import("./pages/KidsBookDetails"));
 const GamesAndGiftsDetails = React.lazy(
-  () => import("./pages/GamesAndGiftsDetails")
+  () => import("./pages/GamesAndGiftsDetails"),
 );
 const StationeryDetails = React.lazy(() => import("./pages/StationeryDetails"));
 const FavoritesDetails = React.lazy(() => import("./pages/FavoritesDetails"));
-
+const Events = React.lazy(() => import("./pages/Events"));
+const EventDetails = React.lazy(() => import("./pages/EventDetails"));
 // Wrapper for Suspense
 const withSuspense = (Component: React.ComponentType) => (
   <Suspense fallback={<Spinner />}>
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
       },
       { path: "Papeterie", element: <Stationery /> },
       { path: "Papeterie/:title", element: withSuspense(StationeryDetails) },
+      { path: "Evenement", element: withSuspense(Events) },
+      { path: "Evenement/:id", element: withSuspense(EventDetails) },
       { path: "À_propos", element: <About /> },
       { path: "Contact", element: <Contact /> },
       { path: "Panier", element: <Cart /> },

@@ -12,7 +12,7 @@ import { fetchCategories } from "../queries/subCategories";
 import { fetchStationery } from "../queries/stationery";
 import type { ProductType } from "../type/product";
 
-export default function KidsBooks() {
+export default function Stationery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Detects if the section is in view
 
@@ -77,7 +77,7 @@ export default function KidsBooks() {
                     >
                       <Product product={product} category="Papeterie" />
                     </motion.div>
-                  )
+                  ),
                 )}
               </div>
 

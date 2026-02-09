@@ -69,6 +69,18 @@ export default function DesktopNav() {
         </li>
         <li>
           <NavLink
+            to="/Evenement"
+            className={({ isActive }) =>
+              ` px-2 py-1 rounded-lg text-center ${
+                isActive ? "bg-amber-600" : "bg-gray-900"
+              }`
+            }
+          >
+            Événements
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/Mes_favoris"
             className={({ isActive }) =>
               ` px-2 py-1 rounded-lg text-center relative ${

@@ -76,6 +76,19 @@ export default function MobileNav() {
                 Papeterie
               </NavLink>
             </li>
+            <li className="w-full">
+              <NavLink
+                to="/Evenement"
+                className={({ isActive }) =>
+                  `block w-full p-2 rounded-lg text-center ${
+                    isActive ? "bg-amber-600" : "bg-gray-900"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Événements
+              </NavLink>
+            </li>
 
             <li className="w-full">
               <NavLink

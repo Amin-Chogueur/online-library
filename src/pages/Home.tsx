@@ -5,36 +5,46 @@ import HomeCard from "../components/home/HomeCard";
 
 const categories = [
   {
+    title: "Événements",
+    description:
+      "Découvrez la magie des livres. Rencontres, ateliers et événements pour tous les passionnés.",
+    image: "/event.jpeg",
+    color: "bg-gradient-to-br from-purple-900 to-indigo-950", // Fixed color
+    link: "/Evenement",
+  },
+  {
     title: "Romans",
     description:
-      "Découvrez une sélection variée de romans, thrillers, et plus.",
+      "Évadez-vous avec notre sélection de thrillers et de récits littéraires incontournables.",
     image: "/roman.jpg",
-    color: "bg-gradient-to-br from-blue-900 to-blue-700",
+    color: "bg-gradient-to-br from-blue-900 to-slate-900",
     link: "/Nos_Livres",
   },
   {
     title: "Livres pour enfants",
-    description: "Des histoires amusantes et éducatives pour les plus jeunes.",
+    description:
+      "Éveillez l'imaginaire des plus jeunes avec des aventures magiques et éducatives.",
     image: "/enfant.jpg",
-    color: "bg-gradient-to-br from-green-900 to-green-700",
+    color: "bg-gradient-to-br from-emerald-900 to-teal-950",
     link: "/Enfants",
   },
   {
     title: "Jeux et cadeaux",
-    description: "Offrez des moments de joie avec nos jeux et idées cadeaux.",
+    description:
+      "Partagez la joie avec une collection unique de jeux de société et d'idées originales.",
     image: "/cadeau.jpg",
-    color: "bg-gradient-to-br from-purple-900 to-purple-700",
+    color: "bg-gradient-to-br from-rose-900 to-zinc-900",
     link: "/Jeux-Cadeaux",
   },
   {
     title: "Papeterie",
-    description: "Tout le nécessaire pour bien réussir à l'école.",
+    description:
+      "Donnez vie à vos idées avec nos articles de qualité pour l'école et le bureau.",
     image: "/Papeterie.jpg",
-    color: "bg-gradient-to-br from-yellow-900 to-yellow-700",
+    color: "bg-gradient-to-br from-amber-700 to-orange-950",
     link: "/Papeterie",
   },
 ];
-
 export default function Home() {
   const ref = useRef(null);
 
@@ -57,14 +67,13 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {categories.map((category, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <HomeCard category={category} />
               </motion.div>
